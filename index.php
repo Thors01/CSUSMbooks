@@ -7,7 +7,9 @@
 		<link rel="stylesheet" media="screen" type="text/css" href="css/styles.css" />
 	</head>
 	<body>
-
+	<?php    
+    require_once("config.php");
+    ?>
 	<div id="border">
 		
 		<div id="header">
@@ -148,6 +150,5 @@
 		</div>
 		
 	</div>
-	
 	</body>
 </html>
