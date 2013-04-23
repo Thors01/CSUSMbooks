@@ -11,30 +11,12 @@
 	<body>
 
 	<div id="border">
-		
-		<div id="header">
-			<div id="logo">
-				<a href="index.html"><img src="img/header_logo.png" alt="Logo Books" /></a>
-			</div>
-			<div id="slogan">
-				<img src="img/header_slogan.png" alt="Logo Slogan" />
-			</div>
-			<div class="globalnavigation">
-				<ul>
-					<li><a href="login.html">Login</a></li>
-					<li>|</li>
-					<li><a href="register.html">Register</a></li>
-					<li>|</li>
-					<li><a href="manageAccount.html">Account</a></li>
-					<li>|</li>
-					<li><a href="howTo.html">HowTo</a></li>
-				</ul>
-			</div>
-		</div>
-	
+		<?php    
+			require_once("header.php");
+		?>	
 		<div id="contentarea">
 			<div id="seperator">
-				<a href="postOffer.html" id="post_offer">Post offer</a>
+				<a href="postOffer.php" id="post_offer">Post offer</a>
 				<div id="searchbar">
 				<form action="#">
 					<label for="search_string">Search:</label>
@@ -96,18 +78,9 @@
 				</form>
 			</div>
 		</div>
-		
-		<div id="footer">
-			<div class="bottomnavigation">
-				<ul>
-					<li><a href="imprint.html">Imprint</a></li>
-					<li>|</li>
-					<li><a href="contactAdmin.html">Contact</a></li>
-				</ul>
-				<p>Get more for your old books | CSUSMbooks</p>
-			</div>
-		</div>
-		
+		<?php    
+			require_once("footer.php");
+		?>
 	</div>
 	
 	</body>
