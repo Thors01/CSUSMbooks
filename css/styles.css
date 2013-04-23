@@ -1,0 +1,406 @@
+html, body {
+	width:100%;
+}
+
+body {
+	font-family:Arial, sans-serif;
+	font-size:12px;
+	background:url(../img/wrap_bg.jpg) 0 155px repeat-x;
+}
+
+input {
+	cursor:pointer;
+}
+
+input[type=text] {
+	cursor:text !important;
+}
+
+
+
+a {
+	text-decoration:none;
+	cursor:pointer;
+	color:#000;
+}
+
+a:hover {
+	text-decoration:underline;
+	color:#970000;
+}
+
+div.clear {
+	clear:both;
+}
+
+table caption {
+	display:none;
+}
+
+/************************************************************************************/
+/* HEADER																			*/
+/************************************************************************************/
+
+#header {
+	height:100px;
+	background:url(../img/header_bg.jpg) 0 0 repeat-x;
+	position:relative;
+}
+
+#logo {
+	margin:auto 0;
+	position:absolute;
+	top:0;
+	left:20px;
+	bottom:0;
+	height:70px;
+}
+
+#slogan {
+	margin:auto 0;
+	position:absolute;
+	top:0;
+	left:100px;
+	bottom:0;
+	height:51px;
+}
+
+#header div.globalnavigation {
+	position:absolute;
+	bottom:0;
+	right:0;
+	margin:0 20px 10px 0;
+}
+	
+	div.globalnavigation ul li {
+		display:inline;
+		padding:0 2px;
+	}
+	
+	div.globalnavigation ul li,
+	div.globalnavigation ul li a {
+		color:#989898;
+		font-size:0.9em;
+		text-transform:uppercase;
+	}
+	
+		div.globalnavigation ul li a:hover {
+			text-decoration:underline;
+		}
+
+/************************************************************************************/
+/* WRAP																				*/
+/************************************************************************************/
+
+#border {
+	width:94%;
+	min-width:730px;
+	margin:20px auto 0 auto;
+	background:#fff;
+	position:relative;
+	border:1px solid #202020;
+}
+
+#contentarea {
+	padding:0 20px;
+	position:relative;
+	background:#fff;
+	min-height:350px;
+}
+
+#navigation {
+	width:180px;
+	position:absolute;
+	bottom:0;
+	top:50px;
+	border-right:2px solid #202020;
+}
+
+#content {
+	padding:0 0 0 20px;
+	position:relative;
+	left:180px;
+	width:calc(100% - 202px);
+	width:-webkit-calc(100% - 202px);
+}
+
+/************************************************************************************/
+/* SEPERATOR																		*/
+/************************************************************************************/
+
+#seperator {
+	height:38px;
+	border-bottom:2px solid #970000;
+	margin:0 0 10px 0;
+	position:relative;
+}
+
+#post_offer {
+	width: 140px;
+	background: url(../img/postbtn_bg.png) 0 0 repeat-x;
+	padding: 0;
+	height: 18px;
+	line-height: 18px;
+	border: 1px solid #7a7a7a;
+	display: block;
+	color: #fff;
+	text-transform: uppercase;
+	position: absolute;
+	left: 20px;
+	margin:9px 0 0 0;
+	text-align: center;
+	
+}
+
+#searchbar {
+	position:absolute;
+	right:0;
+}
+
+#searchbar label {
+	color:#202020;
+	text-transform:uppercase;
+	font-size:0.9em;
+}
+
+#searchbar input {
+	height:16px;
+	width:176px;
+	margin:9px 0 0 0;
+	padding:1px 3px;
+	border:1px solid #7a7a7a;
+}
+
+#searchbar input#search_submit {
+	height:20px;
+	width:20px;
+	padding:0;
+	cursor:pointer;
+	line-height:18px;
+	background:url(../img/search_submit.png) 0 0 no-repeat;
+}
+
+/************************************************************************************/
+/* CONTENTAREA																		*/
+/************************************************************************************/
+
+h1 {
+	height:20px;
+	line-height:20px;
+	margin:0 0 8px 0;
+	color:#970000;
+	font-weight:bold;
+	font-size:1.2em;
+	text-transform:uppercase;
+}
+
+/************************************************************************************/
+/* NAVIGATION																		*/
+/************************************************************************************/
+
+#navigation ul li a {
+	color:#000;
+	line-height:20px;
+	height:20px;
+	display:block;
+}
+
+#navigation ul li a:hover {
+	background:url(../img/arrow_right.png) 0 4px no-repeat;
+	color:#970000;
+	padding:0 0 0 13px;
+	font-weight:bold;
+}
+
+/************************************************************************************/
+/* CONTENT																			*/
+/************************************************************************************/
+
+#content p {
+	margin:0 0 10px 0;
+	line-height:20px;
+}
+
+#content p a {
+	color:#970000;
+}
+
+#content p a:hover {
+	text-decoration:underline;
+}
+
+#content p span.subject {
+	font-style:italic;
+}
+
+table#inputfields tr td {
+	padding:4px 0;
+	vertical-align:top;
+}
+
+table#inputfields label {
+	margin:0 10px 0 0;
+	color:#970000;
+	line-height:20px;
+	white-space:nowrap;
+}
+
+table#inputfields input {
+	height:16px;
+	width:176px;
+	padding:1px;
+	border:1px solid #7a7a7a;
+}
+
+table#inputfields input#picture {
+	width:280px;
+	height:auto;
+	border:none;
+}
+
+table#inputfields span.validation-error {
+	line-height: 1.2em;
+	padding: 0 0 0 15px;
+	background: url(../img/arrow_left.png) 0 1px no-repeat;
+	margin:-15px 0 0 190px;
+	position: relative;
+	display: block;
+	width:calc(100% - 200px);
+	width:-webkit-calc(100% - 200px);
+}
+
+table#inputfields select {
+	float:left;
+	width:180px;
+	padding:1px;
+	border-color:#7a7a7a;
+	background:none;
+	margin:0;
+}
+
+table#inputfields textarea {
+	padding:0;
+	border:1px solid #7a7a7a;
+	margin:0;
+}
+
+#content div.submitbar {
+	border-top:2px solid #970000;
+	margin:10px 0 0 0;
+	padding:5px 0 0 0;
+	text-align:right;
+}
+
+#content div.submitbar input {
+	background:url(../img/arrow_right.png) 0 center no-repeat;
+	border:0;
+	padding:0 0 0 13px;
+	margin:0;
+	color:#970000;
+	font-size:1.2em;
+	font-weight:bold;
+	text-transform:uppercase;
+}
+
+#content div.submitbar input:hover {
+	text-decoration:underline;
+}
+
+table#offers {
+	width:100%;
+}
+
+table#offers thead th {
+	height:20px;
+	line-height:20px;
+	padding:0 0 8px 0;
+	margin:0 0 8px 0;
+	color:#970000;
+	font-size:1.2em;
+	font-weight:bold;
+	text-transform:uppercase;
+}
+
+table#offers tbody td {
+	height:21px;
+	line-height:21px;
+}
+
+table#offers tbody td a.offer-icon {
+	margin-right:5px;
+	display:blocK;
+	float:left;
+}
+
+img#bookcover {
+	float:left;
+	border:1px solid #202020;
+	margin:0 20px 0 0;
+}
+
+table#bookdetails tr td {
+	line-height:1.2em;
+	vertical-align:top;
+	padding:4px 0;
+}
+
+table#bookdetails tr td.leftred {
+	color:#970000;
+	padding-right:10px;
+	white-space:nowrap;
+}
+
+#content a.button {
+	background:url(../img/arrow_right.png) 0 center no-repeat;
+	padding:0 0 0 13px;
+	line-height:1.4em;
+	color:#970000;
+	font-size:1.2em;
+	font-weight:bold;
+	text-transform:uppercase;
+}
+
+#content a.button:hover {
+	text-decoration:underline;
+}
+
+/************************************************************************************/
+/* FOOTER																			*/
+/************************************************************************************/
+
+#footer {
+	padding:10px 20px;
+	background:#fff;
+	height:50px;
+}
+
+#footer div.bottomnavigation {
+	border-top:2px solid #970000;
+	padding:15px 0 0 0;
+	font-size:0.9em;
+}
+
+#footer div.bottomnavigation ul {
+	text-align:center;
+	padding:0 0 5px 0;
+}
+
+#footer div.bottomnavigation ul li {
+	display:inline;
+	padding:0 2px;
+}
+
+#footer div.bottomnavigation ul li,
+#footer div.bottomnavigation ul li a {
+	color:#202020;
+	text-transform:uppercase;
+}
+
+#footer div.bottomnavigation ul li a:hover {
+	text-decoration:underline;
+}
+
+#footer p {
+	text-align:center;
+	color:#202020;
+}
