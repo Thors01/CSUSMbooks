@@ -43,9 +43,26 @@
 			
 			<div id="content">
 				<h1>Contact</h1>
+				<?php  
+					if (isset($_POST['submit'])) {
+						$Name = $_POST['name'];
+						$email = $_POST['mail'];
+						$recipient = "kraem01@cougars.csusm.edu";			
+						if(isset($_POST['phone']) && $_POST['phone'] != "") {
+							$mail_body = $_POST['message'] . "\n\nYou can also contact the user by phone: " . $_POST['phone'] . ".";
+						} else {
+							$mail_body = $_POST['message'];
+						}
+						$subject = $_POST['subject'];
+						$header = "From: ". $Name . " <" . $email . ">\r\n";
+
+						mail($recipient, $subject, $mail_body, $header);
+						echo "<p>You succesfully send an email. We will respond as soon as possible.</p>";
+					} else {
+				?>
 				<p>Here you can send a message to the admin.</p>
 				
-				<form action="#">
+				<form action="contactAdmin.php" method="post">
 					<table id="inputfields">
 						<caption>contact admin</caption>
 						<tbody>
@@ -78,6 +95,9 @@
 				</form>
 			</div>
 		</div>
+		<?php
+		}
+		?>
 		<?php    
 			require_once("footer.php");
 		?>
