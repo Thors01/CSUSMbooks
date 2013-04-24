@@ -36,26 +36,47 @@
 			<div id="content">
 				<h1>Post new book offer</h1>
 				<p>Please fill in the following fields for posting a new book offer.</p>
-				
-				<form action="#">
+				<?php  
+					if (isset($_POST['submit'])) {
+						$title = $_POST['Title'];
+						$author = $_POST['Author'];
+						$edition = $_POST['Edition'];
+						$isbn = $_POST['ISBN'];
+						$category = $_POST['category'];
+						$condition = $_POST['condition'];
+						$expdate = $_POST['ExpDate'];
+						$notes = $_POST['Notes'];
+						$price = $_POST['Price'];
+						//$picture = $_POST['picture'];
+						
+						$dbtable = "OFFER";
+						$sqlstring = "INSERT INTO $dbtable VALUES ($title, $author, $edition, $isbn, $condition, $category, $price, $sellerid, $postdate, $expdate, $imagepath, $notes)";
+						$queryresult = mysql_query($sqlstring, $connection);
+						if (!$queryresult) {
+							echo mysql_error();
+						}
+						echo "<p>You succesfully posted a new book offer.</p>";
+					} else {
+				?>
+				<form action="postOffer.php" method="post">
 					<table id="inputfields">
 						<caption>post new book</caption>
 						<tbody>
 							<tr>
-								<td><label for="booktitle">Book title:</label></td>
-								<td><input type="text" name="booktitle" id="booktitle" data-validation-pattern="^.{2,}$" data-validation-message="Please enter a book title." /></td>
+								<td><label for="Title">Book title:</label></td>
+								<td><input type="text" name="Title" id="Title" data-validation-pattern="^.{2,}$" data-validation-message="Please enter a book title." /></td>
 							</tr>
 							<tr>
-								<td><label for="author">Author:</label></td>
-								<td><input type="text" name="author" id="author" data-validation-pattern="^.{2,}$" data-validation-message="Please enter an author." /></td>
+								<td><label for="Author">Author:</label></td>
+								<td><input type="text" name="Author" id="Author" data-validation-pattern="^.{2,}$" data-validation-message="Please enter an author." /></td>
 							</tr>
 							<tr>
-								<td><label for="edition">Edition:</label></td>
-								<td><input type="text" name="edition" id="edition" /></td>
+								<td><label for="Edition">Edition:</label></td>
+								<td><input type="text" name="Edition" id="Edition" /></td>
 							</tr>
 							<tr>
-								<td><label for="isbn">ISBN:</label></td>
-								<td><input type="text" name="isbn" id="isbn" data-validation-pattern="^[0-9]([-| ]?[0-9]){9,12}$" data-validation-message="Please enter an ISBN-10 or ISBN-13. Ex: 978-1-402-894-626" /></td>
+								<td><label for="ISBN">ISBN:</label></td>
+								<td><input type="text" name="ISBN" id="ISBN" data-validation-pattern="^[0-9]([-| ]?[0-9]){9,12}$" data-validation-message="Please enter an ISBN-10 or ISBN-13. Ex: 978-1-402-894-626" /></td>
 							</tr>
 							<tr>
 								<td><label for="category">Category:</label></td>
@@ -77,20 +98,20 @@
 								</select></td>
 							</tr>
 							<tr>
-								<td><label for="expdate">Expiration Date:</label></td>
-								<td><input type="date" name="expdate" id="expdate" /></td>
+								<td><label for="ExpDate">Expiration Date:</label></td>
+								<td><input type="date" name="ExpDate" id="ExpDate" /></td>
 							</tr>
 							<tr>
-								<td><label for="note">Note:</label></td>
-								<td><input type="text" name="note" id="note" /></td>
+								<td><label for="Notes">Note:</label></td>
+								<td><input type="text" name="Notes" id="Notes" /></td>
 							</tr>
 							<tr>
-								<td><label for="price">Price:</label></td>
-								<td><input type="text" name="price" id="price" data-validation-pattern="^[0-9]{1,}\.[0-9]{2}$" data-validation-message="Please enter a price. Ex: 12.00" /></td>
+								<td><label for="Price">Price:</label></td>
+								<td><input type="text" name="Price" id="Price" data-validation-pattern="^[0-9]{1,}\.[0-9]{2}$" data-validation-message="Please enter a price. Ex: 12.00" /></td>
 							</tr>
 							<tr>
-								<td><label for="picture">Picture:</label></td>
-								<td><input type="file" name="picture" id="picture" /></td>
+								<td><label for="ImagePath">Picture:</label></td>
+								<td><input type="file" name="ImagePath" id="ImagePath" /></td>
 							</tr>
 						</tbody>
 					</table>
@@ -100,7 +121,8 @@
 				</form>
 			</div>
 		</div>
-		<?php    
+		<?php   
+			} 
 			require_once("footer.php");
 		?>		
 	</div>
