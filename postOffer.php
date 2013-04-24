@@ -36,29 +36,7 @@
 			<div id="content">
 				<h1>Post new book offer</h1>
 				<p>Please fill in the following fields for posting a new book offer.</p>
-				<?php  
-					if (isset($_POST['submit'])) {
-						$title = $_POST['Title'];
-						$author = $_POST['Author'];
-						$edition = $_POST['Edition'];
-						$isbn = $_POST['ISBN'];
-						$category = $_POST['category'];
-						$condition = $_POST['condition'];
-						$expdate = $_POST['ExpDate'];
-						$notes = $_POST['Notes'];
-						$price = $_POST['Price'];
-						//$picture = $_POST['picture'];
-						
-						$dbtable = "OFFER";
-						$sqlstring = "INSERT INTO $dbtable VALUES ($title, $author, $edition, $isbn, $condition, $category, $price, $sellerid, $postdate, $expdate, $imagepath, $notes)";
-						$queryresult = mysql_query($sqlstring, $connection);
-						if (!$queryresult) {
-							echo mysql_error();
-						}
-						echo "<p>You succesfully posted a new book offer.</p>";
-					} else {
-				?>
-				<form action="postOffer.php" method="post">
+				<form action="postOfferDB.php" method="post" enctype="multipart/form-data">
 					<table id="inputfields">
 						<caption>post new book</caption>
 						<tbody>
@@ -79,23 +57,38 @@
 								<td><input type="text" name="ISBN" id="ISBN" data-validation-pattern="^[0-9]([-| ]?[0-9]){9,12}$" data-validation-message="Please enter an ISBN-10 or ISBN-13. Ex: 978-1-402-894-626" /></td>
 							</tr>
 							<tr>
-								<td><label for="category">Category:</label></td>
-								<td><select id="category">
-									<option value="arts">Arts & Photography</option>
-									<option value="business">Business & Investing</option>
-									<option value="computer">Computers & Technology</option>
-									<option value="education">Education & Reference</option>
-									<option value="medical">Medical</option>
-									<option value="professional">Professional & Technical</option>
-									<option value="science">Science & Math</option>
-								</select></td>
+								<td><label for="Category">Category:</label></td>
+								<td>
+									<?php 
+										$sql_category = "SELECT * FROM CATEGORY";
+										$result_category = $connection->query($sql_category);
+									?>
+									<select id="Category" name="Category">
+									<?php 
+										while ($row_category = $result_category->fetch_object()) 
+										{       
+										echo "<option value='{$row_category->CategoryId}'>{$row_category->Title}</option>\n";
+										}   
+									?> 
+									</select>
+								</td>
 							</tr>
 							<tr>
-								<td><label for="condition">Condition:</label></td>
-								<td><select id="condition">
-									<option value="good">good</option>
-									<option value="bad">bad</option>
-								</select></td>
+								<td><label for="Condition">Condition:</label></td>
+								<td>
+									<?php 
+										$sql_condition = "SELECT * FROM `CONDITION`";
+										$result_condition = $connection->query($sql_condition);
+									?>
+									<select id="Condition" name="Condition">    
+									<?php 
+										while ($row_condition = $result_condition->fetch_object()) 
+										{       
+										echo "<option value='{$row_condition->ConditionId}'>{$row_condition->Description}</option>\n";
+										}   
+									?> 
+									</select>
+								</td>
 							</tr>
 							<tr>
 								<td><label for="ExpDate">Expiration Date:</label></td>
@@ -111,7 +104,7 @@
 							</tr>
 							<tr>
 								<td><label for="ImagePath">Picture:</label></td>
-								<td><input type="file" name="ImagePath" id="ImagePath" /></td>
+								<td><input type="file" name="file" id="file" /></td>
 							</tr>
 						</tbody>
 					</table>
@@ -121,8 +114,7 @@
 				</form>
 			</div>
 		</div>
-		<?php   
-			} 
+		<?php 
 			require_once("footer.php");
 		?>		
 	</div>
