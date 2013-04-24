@@ -1,5 +1,5 @@
 <?php    
-	//include "config.php";
+	include "config.php";
 ?>
 <div id="header">
 	<div id="logo">
