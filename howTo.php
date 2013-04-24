@@ -32,7 +32,7 @@
 			</div>
 			
 			<div id="content">
-				<h1>How To - blublub</h1>
+				<h1>How To - blublub123</h1>
 				<p>With the left sidebar you can browse for book offers sorted by category.<br />
 				The search bar above allows you to find books by title or ISBN.<br />
 				The button "post offer" enables you to create a new book offer.<br />
