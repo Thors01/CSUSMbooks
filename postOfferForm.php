@@ -4,19 +4,19 @@
 		<tbody>
 			<tr>
 				<td><label for="title">Book title:</label></td>
-				<td><input type="text" value="<?php echo isset($_POST["title"])?$_POST["title"]:""; ?>" name="title" id="title" data-validation-pattern="^.{2,}$" data-validation-message="Please enter a book title." /></td>
+				<td><input type="text" value="<?= htmlspecialchars($title) ?>" name="title" id="title" data-validation-pattern="^.{2,}$" data-validation-message="Please enter a book title." /></td>
 			</tr>
 			<tr>
 				<td><label for="author">Author:</label></td>
-				<td><input type="text" name="author" id="author" data-validation-pattern="^.{2,}$" data-validation-message="Please enter an author." /></td>
+				<td><input type="text" value="<?= htmlspecialchars($author) ?>" name="author" id="author" data-validation-pattern="^.{2,}$" data-validation-message="Please enter an author." /></td>
 			</tr>
 			<tr>
 				<td><label for="edition">Edition:</label></td>
-				<td><input type="text" name="edition" id="edition" /></td>
+				<td><input type="text" value="<?= htmlspecialchars($edition) ?>" name="edition" id="edition" /></td>
 			</tr>
 			<tr>
 				<td><label for="isbn">ISBN:</label></td>
-				<td><input type="text" name="isbn" id="isbn" data-validation-pattern="^[0-9]([-| ]?[0-9]){9,12}$" data-validation-message="Please enter an ISBN-10 or ISBN-13. Ex: 978-1-402-894-626" /></td>
+				<td><input type="text" value="<?= htmlspecialchars($isbn) ?>" name="isbn" id="isbn" data-validation-pattern="^[0-9]([-| ]?[0-9]){9,12}$" data-validation-message="Please enter an ISBN-10 or ISBN-13. Ex: 978-1-402-894-626" /></td>
 			</tr>
 			<tr>
 				<td><label for="category">Category:</label></td>
@@ -54,15 +54,15 @@
 			</tr>
 			<tr>
 				<td><label for="expdate">Expiration Date:</label></td>
-				<td><input type="date" name="expdate" id="expdate" /></td>
+				<td><input type="date" value="<?= htmlspecialchars($expDate) ?>" name="expdate" id="expdate" /></td>
 			</tr>
 			<tr>
-				<td><label for="notes">Note:</label></td>
-				<td><input type="text" name="notes" id="notes" /></td>
+				<td><label for="notes">Notes:</label></td>
+				<td><input type="text" value="<?= htmlspecialchars($notes) ?>" name="notes" id="notes" /></td>
 			</tr>
 			<tr>
 				<td><label for="price">Price:</label></td>
-				<td><input type="text" name="price" id="price" data-validation-pattern="^[0-9]{1,}\.[0-9]{2}$" data-validation-message="Please enter a price. Ex: 12.00" /></td>
+				<td><input type="text" value="<?= htmlspecialchars($price) ?>" name="price" id="price" data-validation-pattern="^[0-9]{1,}\.[0-9]{2}$" data-validation-message="Please enter a price. Ex: 12.00" /></td>
 			</tr>
 			<tr>
 				<td><label for="file">Picture:</label></td>

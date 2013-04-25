@@ -1,6 +1,17 @@
 <?php
 function content() {
 	include("config.php");
+	
+	$title = '';
+	$author = '';
+	$edition = '';
+	$isbn = '';
+	$category = '';
+	$condition = '';
+	$expDate = '';
+	$notes = '';
+	$price = '';
+	
 	if(isset($_POST['submit'])) {
 		$title = $_POST['title'];
 		$author = $_POST['author'];
