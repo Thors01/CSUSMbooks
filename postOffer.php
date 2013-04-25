@@ -26,6 +26,8 @@ function content() {
 		// toDo: Should be the id depending on the logged in user.
 		$sellerId = 0;
 		
+		$isbn = str_replace("-", "", $isbn);
+		
 		$postDate = date("Y-m-d");
 		if(empty($expDate)) {
 			$exp = mktime(0,0,0,date("m"),date("d")+14,date("Y"));
@@ -39,7 +41,7 @@ function content() {
 		|| !preg_match('/^.{2,}$/', $title) 
 		|| !preg_match('/^.{2,}$/', $author) 
 		|| !preg_match('/^[0-9]([-| ]?[0-9]){9,12}$/', $isbn) 
-		|| !preg_match('/^[0-9]{1,}\.[0-9]{2}$/', $price)) {
+		|| !preg_match('/^[0-9]{1,4}\.[0-9]{2}$/', $price)) {
 			echo "<h1>Post new book offer</h1>";
 			echo "<p class=\"error\">Please check your input!</p>";
 			require_once("postOfferForm.php");
@@ -51,6 +53,7 @@ function content() {
 			  die('Error: ' . mysqli_error($connection));
 			  }
 			else {
+				echo "<h1>Post new book offer</h1>";
 				echo "<p>You succesfully posted a new book offer.</p>";
 			}
 		}

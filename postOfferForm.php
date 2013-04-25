@@ -62,7 +62,7 @@
 			</tr>
 			<tr>
 				<td><label for="price">Price:</label></td>
-				<td><input type="text" value="<?= htmlspecialchars($price) ?>" name="price" id="price" data-validation-pattern="^[0-9]{1,}\.[0-9]{2}$" data-validation-message="Please enter a price. Ex: 12.00" /></td>
+				<td><input type="text" value="<?= htmlspecialchars($price) ?>" name="price" id="price" data-validation-pattern="^[0-9]{1,4}\.[0-9]{2}$" data-validation-message="Please enter a price. Ex: 12.00" /></td>
 			</tr>
 			<tr>
 				<td><label for="file">Picture:</label></td>
