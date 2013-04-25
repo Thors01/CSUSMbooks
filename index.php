@@ -10,70 +10,14 @@ function content($connection) {
 			</tr>
 		</thead>
 		<tbody>
-			<tr>
-				<td><a href="bookDetails.php">Programming the World Wide Web (7th)</a></td>
-				<td>Robert W. Sebesta</td>
-			</tr>
-			<tr>
-				<td>Modern Database Management (8th)</td>
-				<td>Jeffrey A. Hoffer</td>
-			</tr>
-			<tr>
-				<td>Linear Programming</td>
-				<td>Vasek Chvatal</td>
-			</tr>
-			<tr>
-				<td>Financial Accounting</td>
-				<td>Paul D. Kimmel</td>
-			</tr>
-			<tr>
-				<td><a href="bookDetails.html">Programming the World Wide Web (7th)</a></td>
-				<td>Robert W. Sebesta</td>
-			</tr>
-			<tr>
-				<td>Modern Database Management (8th)</td>
-				<td>Jeffrey A. Hoffer</td>
-			</tr>
-			<tr>
-				<td>Linear Programming</td>
-				<td>Vasek Chvatal</td>
-			</tr>
-			<tr>
-				<td>Financial Accounting</td>
-				<td>Paul D. Kimmel</td>
-			</tr>
-			<tr>
-				<td><a href="bookDetails.html">Programming the World Wide Web (7th)</a></td>
-				<td>Robert W. Sebesta</td>
-			</tr>
-			<tr>
-				<td>Modern Database Management (8th)</td>
-				<td>Jeffrey A. Hoffer</td>
-			</tr>
-			<tr>
-				<td>Linear Programming</td>
-				<td>Vasek Chvatal</td>
-			</tr>
-			<tr>
-				<td>Financial Accounting</td>
-				<td>Paul D. Kimmel</td>
-			</tr>
-			<tr>
-				<td><a href="bookDetails.html">Programming the World Wide Web (7th)</a></td>
-				<td>Robert W. Sebesta</td>
-			</tr>
-			<tr>
-				<td>Modern Database Management (8th)</td>
-				<td>Jeffrey A. Hoffer</td>
-			</tr>
-			<tr>
-				<td>Linear Programming</td>
-				<td>Vasek Chvatal</td>
-			</tr>
-			<tr>
-				<td>Financial Accounting</td>
-				<td>Paul D. Kimmel</td>
-			</tr>
+		<?php 
+			$sql_offer = "SELECT Title, Author FROM OFFER";
+			$result_offer= $connection->query($sql_offer);
+			while ($row_offer = $result_offer->fetch_object()) {       
+				echo "<tr><td>{$row_offer->Title}</td>";
+				echo "<td>{$row_offer->Author}</td></tr>";
+			}   
+		?> 
 		</tbody>
 	</table>	
 <?php
