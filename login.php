@@ -1,5 +1,5 @@
 <?php    
-function content() {
+function content($connection) {
 ?>	
 	<h1>Login</h1>
 	<p>Here you can login to your account:<br />
@@ -26,7 +26,6 @@ function content() {
 <?php
 }
 
-include("config.php");
 include("layout.php");
 
 ?>

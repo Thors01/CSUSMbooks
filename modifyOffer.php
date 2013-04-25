@@ -1,5 +1,5 @@
 <?php    
-function content() {
+function content($connection) {
 ?>	
 	<h1>Modify existing book offer</h1>
 	<p>Please fill in the following fields for modifying an existing book offer.</p>
@@ -69,7 +69,6 @@ function content() {
 <?php
 }
 
-include("config.php");
 include("layout.php");
 
 ?>

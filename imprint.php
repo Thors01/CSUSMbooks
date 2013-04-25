@@ -1,5 +1,5 @@
 <?php    
-function content() {
+function content($connection) {
 ?>	
 	<h1>Imprint</h1>
 	<p>Responsible Admins:<br />
@@ -15,7 +15,6 @@ function content() {
 <?php
 }
 
-include("config.php");
 include("layout.php");
 
 ?>

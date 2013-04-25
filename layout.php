@@ -1,3 +1,7 @@
+<?php
+include("config.php");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -42,22 +46,11 @@
 				</div>
 			</div>
 			<div id="navigation">
-				<h1>Categories</h1>
-				
-				<ul>
-					<li><a href="#">Arts & Photography</a></li>
-					<li><a href="#">Business & Investing</a></li>
-					<li><a href="#">Computers & Technology</a></li>
-					<li><a href="#">Education & Reference</a></li>
-					<li><a href="#">Medical</a></li>
-					<li><a href="#">Professional & Technical</a></li>
-					<li><a href="#">Science & Math</a></li>
-				</ul>
-
+				<? listCategory($connection); ?> 	
 			</div>
 			
 			<div id="content">
-				<? content(); ?>
+				<? content($connection); ?>
 			</div>
 		</div>
 		<div id="footer">

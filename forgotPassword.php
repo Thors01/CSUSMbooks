@@ -1,5 +1,5 @@
 <?php    
-function content() {
+function content($connection) {
 ?>	
 	<h1>Request new password</h1>
 	<p>Here you can request a new password for your account.</p>
@@ -25,7 +25,6 @@ function content() {
 <?php
 }
 
-include("config.php");
 include("layout.php");
 
 ?>

@@ -1,5 +1,5 @@
 <?php    
-function content() {
+function content($connection) {
 ?>	
 	<h1>error</h1>
 	<p>We're sorry but an error occurred. Please go back to the main page.</p>
@@ -9,7 +9,6 @@ function content() {
 <?php
 }
 
-include("config.php");
 include("layout.php");
 
 ?>

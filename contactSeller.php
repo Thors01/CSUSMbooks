@@ -1,5 +1,5 @@
 <?php
-function content() {	
+function content($connection) {	
 ?>
 	<h1>Contact Seller</h1>
 	<?php // the line above has to be generated.
@@ -68,7 +68,6 @@ function content() {
 	}
 }
 
-include("config.php");
 include("layout.php");
 
 ?>

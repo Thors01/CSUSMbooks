@@ -1,5 +1,5 @@
 <?php
-function content() {	
+function content($connection) {	
 ?>
 	<h1>Contact</h1>
 	<?php 
@@ -71,7 +71,6 @@ function content() {
 	}
 }
 
-include("config.php");
 include("layout.php");
 
 ?>

@@ -1,5 +1,5 @@
 <?php
-function content() {	
+function content($connection) {	
 ?>
 	<h1>How To</h1>
 	<p>With the left sidebar you can browse for book offers sorted by category.<br />
@@ -10,7 +10,6 @@ function content() {
 <?php
 }
 
-include("config.php");
 include("layout.php");
 
 ?>

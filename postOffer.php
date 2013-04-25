@@ -1,7 +1,5 @@
 <?php
-function content() {
-	include("config.php");
-	
+function content($connection) {
 	$title = '';
 	$author = '';
 	$edition = '';
