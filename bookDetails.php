@@ -1,47 +1,83 @@
 <?php    
 function content($connection) {
+	$title = '';
+	$author = '';
+	$edition = '';
+	$isbn = '';
+	$category = '';
+	$condition = '';
+	$expDate = '';
+	$notes = '';
+	$price = '';
+	
+	if (!isset($_GET["offerid"])) {
+		echo "blub";
+	}
+	else {
+		$offerid = $_GET["offerid"];
+	}
+	
+	$sql_offer = "SELECT * FROM OFFER WHERE OfferId=$offerid";
+	$result_offer = $connection->query($sql_offer);
+	
+	$bookDetails = mysqli_fetch_array($result_offer);
+	
+	// get category
+	$categoryId = $bookDetails[6];
+	$sql_offer_category = "SELECT Title FROM CATEGORY WHERE CategoryId=$categoryId";
+	$categoryTitle = mysqli_fetch_array($connection->query($sql_offer_category));
+	
+	// get condition
+	$conditionId = $bookDetails[5];
+	$sql_offer_condition = "SELECT Description FROM `CONDITION` WHERE ConditionId=$conditionId";
+	$conditionDescription = mysqli_fetch_array($connection->query($sql_offer_condition));
+	
 ?>	
 	<h1>Book details</h1>
 		
-	<img src="img/example_cover.png" alt="Example Book" id="bookcover" />
+	<img src="img/<?= $bookDetails[11] ?>" alt="Example Book" id="bookcover" />
 	
 	<table id="bookdetails">
 		<caption>Book Details</caption>
 		<tr>
 			<td class="leftred">Book Title:</td>
-			<td>Programming the World Wide Web (7th)</td>
+			<td><?= $bookDetails[1] ?></td>
+		</tr>
+		<tr>
+			<td class="leftred">Edition:</td>
+			<td><?= $bookDetails[3] ?></td>
 		</tr>
 		<tr>
 			<td class="leftred">Author:</td>
-			<td>Robert W. Sebesta</td>
+			<td><?= $bookDetails[2] ?></td>
 		</tr>
 		<tr>
 			<td class="leftred">ISBN:</td>
-			<td>978-0132665810</td>
+			<td><?= $bookDetails[4] ?></td>
 		</tr>
 		<tr>
 			<td class="leftred">Category:</td>
-			<td>Computers &amp; Technology</td>
+			<td><?= $categoryTitle[0] ?></td>
 		</tr>
 		<tr>
 			<td class="leftred">Posted on:</td>
-			<td>March 12, 2013</td>
+			<td><?= $bookDetails[9] ?></td>
 		</tr>
 		<tr>
 			<td class="leftred">Expires on:</td>
-			<td>March 30, 2013</td>
+			<td><?= $bookDetails[10] ?></td>
 		</tr>
 		<tr>
 			<td class="leftred">Book condition:</td>
-			<td>rarley used</td>
+			<td><?= $conditionDescription[0] ?></td>
 		</tr>
 		<tr>
 			<td class="leftred">Note from seller:</td>
-			<td>This book was rarely used in CIS444 and is still in good condition.</td>
+			<td><?= $bookDetails[12] ?></td>
 		</tr>
 		<tr>
 			<td class="leftred">Price:</td>
-			<td>$25.00</td>
+			<td>$ <?= $bookDetails[7] ?></td>
 		</tr>
 	</table>
 	
