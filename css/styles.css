@@ -16,8 +16,6 @@ input[type=text] {
 	cursor:text !important;
 }
 
-
-
 a {
 	text-decoration:none;
 	cursor:pointer;
@@ -105,7 +103,6 @@ table caption {
 	padding:0 20px;
 	position:relative;
 	background:#fff;
-	min-height:350px;
 }
 
 #navigation {
@@ -122,6 +119,7 @@ table caption {
 	left:180px;
 	width:calc(100% - 202px);
 	width:-webkit-calc(100% - 202px);
+	min-height:350px;
 }
 
 /************************************************************************************/
@@ -149,7 +147,6 @@ table caption {
 	left: 20px;
 	margin:9px 0 0 0;
 	text-align: center;
-	
 }
 
 #searchbar {
@@ -221,6 +218,10 @@ h1 {
 	line-height:20px;
 }
 
+#content p.error {
+	font-weight:bold;
+}
+
 #content p a {
 	color:#970000;
 }
@@ -252,10 +253,11 @@ table#inputfields input {
 	border:1px solid #7a7a7a;
 }
 
-table#inputfields input#picture {
+table#inputfields input#file {
 	width:280px;
 	height:auto;
 	border:none;
+	padding:0;
 }
 
 table#inputfields span.validation-error {

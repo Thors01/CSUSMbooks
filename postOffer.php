@@ -1,123 +1,59 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<title>Get more for your old books!</title>
-		<link rel="stylesheet" media="screen" type="text/css" href="css/reset.css" />
-		<link rel="stylesheet" media="screen" type="text/css" href="css/styles.css" />
-		<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-        <script type="text/javascript" src="js/validation.js"></script>
-	</head>
-	<body>
-
-	<div id="border">
-		<?php    
-			require_once("header.php");
-		?>	
-		<div id="contentarea">
-			<?php    
-				require_once("searchbar.php");
-			?>
-			<div id="navigation">
-				<h1>Categories</h1>
+<?php
+function content() {
+	include("config.php");
+	if(isset($_POST['submit'])) {
+		$title = $_POST['title'];
+		$author = $_POST['author'];
+		$edition = $_POST['edition'];
+		$isbn = $_POST['isbn'];
+		$category = $_POST['category'];
+		$condition = $_POST['condition'];
+		$expDate = $_POST['expdate'];
+		$notes = $_POST['notes'];
+		$price = $_POST['price'];
+		
+		// toDo: Should be the id depending on the logged in user.
+		$sellerId = 0;
+		
+		$postDate = date("Y-m-d");
+		if(empty($expDate)) {
+			$exp = mktime(0,0,0,date("m"),date("d")+14,date("Y"));
+			$expDate = date("Y-m-d", $exp);
+		}
 				
-				<ul>
-					<li><a href="#">Arts & Photography</a></li>
-					<li><a href="#">Business & Investing</a></li>
-					<li><a href="#">Computers & Technology</a></li>
-					<li><a href="#">Education & Reference</a></li>
-					<li><a href="#">Medical</a></li>
-					<li><a href="#">Professional & Technical</a></li>
-					<li><a href="#">Science & Math</a></li>
-				</ul>
-
-			</div>
-			
-			<div id="content">
-				<h1>Post new book offer</h1>
-				<p>Please fill in the following fields for posting a new book offer.</p>
-				<form action="postOfferDB.php" method="post" enctype="multipart/form-data">
-					<table id="inputfields">
-						<caption>post new book</caption>
-						<tbody>
-							<tr>
-								<td><label for="Title">Book title:</label></td>
-								<td><input type="text" name="Title" id="Title" data-validation-pattern="^.{2,}$" data-validation-message="Please enter a book title." /></td>
-							</tr>
-							<tr>
-								<td><label for="Author">Author:</label></td>
-								<td><input type="text" name="Author" id="Author" data-validation-pattern="^.{2,}$" data-validation-message="Please enter an author." /></td>
-							</tr>
-							<tr>
-								<td><label for="Edition">Edition:</label></td>
-								<td><input type="text" name="Edition" id="Edition" /></td>
-							</tr>
-							<tr>
-								<td><label for="ISBN">ISBN:</label></td>
-								<td><input type="text" name="ISBN" id="ISBN" data-validation-pattern="^[0-9]([-| ]?[0-9]){9,12}$" data-validation-message="Please enter an ISBN-10 or ISBN-13. Ex: 978-1-402-894-626" /></td>
-							</tr>
-							<tr>
-								<td><label for="Category">Category:</label></td>
-								<td>
-									<?php 
-										$sql_category = "SELECT * FROM CATEGORY";
-										$result_category = $connection->query($sql_category);
-									?>
-									<select id="Category" name="Category">
-									<?php 
-										while ($row_category = $result_category->fetch_object()) 
-										{       
-										echo "<option value='{$row_category->CategoryId}'>{$row_category->Title}</option>\n";
-										}   
-									?> 
-									</select>
-								</td>
-							</tr>
-							<tr>
-								<td><label for="Condition">Condition:</label></td>
-								<td>
-									<?php 
-										$sql_condition = "SELECT * FROM `CONDITION`";
-										$result_condition = $connection->query($sql_condition);
-									?>
-									<select id="Condition" name="Condition">    
-									<?php 
-										while ($row_condition = $result_condition->fetch_object()) 
-										{       
-										echo "<option value='{$row_condition->ConditionId}'>{$row_condition->Description}</option>\n";
-										}   
-									?> 
-									</select>
-								</td>
-							</tr>
-							<tr>
-								<td><label for="ExpDate">Expiration Date:</label></td>
-								<td><input type="date" name="ExpDate" id="ExpDate" /></td>
-							</tr>
-							<tr>
-								<td><label for="Notes">Note:</label></td>
-								<td><input type="text" name="Notes" id="Notes" /></td>
-							</tr>
-							<tr>
-								<td><label for="Price">Price:</label></td>
-								<td><input type="text" name="Price" id="Price" data-validation-pattern="^[0-9]{1,}\.[0-9]{2}$" data-validation-message="Please enter a price. Ex: 12.00" /></td>
-							</tr>
-							<tr>
-								<td><label for="ImagePath">Picture:</label></td>
-								<td><input type="file" name="file" id="file" /></td>
-							</tr>
-						</tbody>
-					</table>
-					<div class="submitbar">
-					<input type="submit" name="submit" id="submit" value="post new book offer" />
-					</div>
-				</form>
-			</div>
-		</div>
-		<?php 
-			require_once("footer.php");
-		?>		
-	</div>
+		$imagePath = "";
+		require_once("lib/upload_file.php");
+		
+		if(empty($title) || empty($author) || empty($isbn) || empty($price) 
+		|| !preg_match('/^.{2,}$/', $title) 
+		|| !preg_match('/^.{2,}$/', $author) 
+		|| !preg_match('/^[0-9]([-| ]?[0-9]){9,12}$/', $isbn) 
+		|| !preg_match('/^[0-9]{1,}\.[0-9]{2}$/', $price)) {
+			echo "<h1>Post new book offer</h1>";
+			echo "<p class=\"error\">Please check your input!</p>";
+			require_once("postOfferForm.php");
+		}
+		else {
+			$sqlstring = "INSERT INTO OFFER (`Title`, `Author`, `Edition`, `ISBN`, `ConditionId`, `CategoryId`, `Price`, `SellerId`, `PostDate`, `ExpDate`, `ImagePath`, `Notes`) VALUES ('$title', '$author', '$edition', '$isbn', $condition, $category, '$price', $sellerId, '$postDate', '$expDate', '$imagePath', '$notes')";
+			if (!mysqli_query($connection,$sqlstring))
+			  {
+			  die('Error: ' . mysqli_error($connection));
+			  }
+			else {
+				echo "<p>You succesfully posted a new book offer.</p>";
+			}
+		}
+	}
 	
-	</body>
-</html>
+	else {
+	?>
+
+	<h1>Post new book offer</h1>
+	<p>Please fill in the following fields for posting a new book offer.</p>
+	<?php 
+	require_once("postOfferForm.php");
+	}
+}
+
+include("layout.php");
+?>
