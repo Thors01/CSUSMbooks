@@ -30,7 +30,7 @@ function content($connection) {
 			$lastname = $_POST['lastname'];
 			$mail = $_POST['mail'];
 			$password = md5($_POST['password']);
-			$phone = $_POST['phone']; // It stores a different number?!
+			$phone = $_POST['phone'];
 			$register = "INSERT INTO SELLER (`FirstName`, `LastName`, `Mail`, `Phone`, `Password`) VALUES ('$firstname', '$lastname', '$mail', '$phone', '$password')";
 			
 			if (!mysqli_query($connection, $register)) {

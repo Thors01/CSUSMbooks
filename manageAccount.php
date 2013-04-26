@@ -50,7 +50,7 @@ function content($connection) {
 	</table>
 <?php
 	} else {
-		echo "Please login or register first";
+		echo "Please login or register first.";
 	}
 }
 
