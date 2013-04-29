@@ -11,7 +11,7 @@ function content($connection) {
 		</thead>
 		<tbody>
 		<?php 
-			$sql_offer = "SELECT OfferId, Title, Author FROM OFFER";
+			$sql_offer = "SELECT OfferId, Title, Author FROM OFFER WHERE CURDATE() < ExpDate;";
 			$result_offer= $connection->query($sql_offer);
 			while ($row_offer = $result_offer->fetch_object()) {    
 			?>   
