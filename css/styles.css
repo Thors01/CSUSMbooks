@@ -82,6 +82,10 @@ table caption {
 		text-transform:uppercase;
 	}
 	
+		div.globalnavigation ul li.smallcaps {
+			text-transform:none;
+		}
+	
 		div.globalnavigation ul li a:hover {
 			text-decoration:underline;
 		}

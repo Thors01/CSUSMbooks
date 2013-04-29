@@ -28,7 +28,7 @@ function content($connection) {
 			setcookie("login", "true", time() + 86400);
 			$_SESSION['sellerid'] = $getseller[0];
 			$_SESSION['sellerfirstname'] = $getseller[1];
-			header("Location: http://cis444.cs.csusm.edu/kraem01/group4/manageAccount.php"); // has to be changed later
+			header("Location: manageAccount.php");
 			exit();
 		} else {
 			if(!empty($error)) {

@@ -9,6 +9,8 @@ function content($connection) {
 	$expDate = '';
 	$notes = '';
 	$price = '';
+	$sellerId = $_SESSION['sellerid'];
+	$sellerFirstname = $_SESSION['sellerfirstname'];
 	
 	if(isset($_POST['submit'])) {
 		$title = $_POST['title'];
@@ -20,9 +22,6 @@ function content($connection) {
 		$expDate = $_POST['expdate'];
 		$notes = $_POST['notes'];
 		$price = $_POST['price'];
-		
-		// toDo: Should be the id depending on the logged in user.
-		$sellerId = 0;
 		
 		$isbn = str_replace("-", "", $isbn);
 		
@@ -58,12 +57,20 @@ function content($connection) {
 	}
 	
 	else {
-	?>
-
-	<h1>Post new book offer</h1>
-	<p>Please fill in the following fields for posting a new book offer.</p>
-	<?php 
-	require_once("postOfferForm.php");
+		if(isset($sellerId)) {
+			?>
+			<h1>Post new book offer</h1>
+			<p><b><?= $sellerFirstname ?></b>, please fill in the following fields for posting a new book offer.</p>
+			<?php 
+			require_once("postOfferForm.php");
+		}
+		else {
+			// toDo: redirect in order to login and going back to postOffer automatically
+			?>
+			<h1>Post new book offer</h1>
+			<p>Please login first: <a href="login.php">Login</a></p>
+			<?php
+		}	
 	}
 }
 

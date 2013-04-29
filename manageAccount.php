@@ -3,7 +3,6 @@ function content($connection) {
 ?>	
 	<h1>manage account</h1>
 	<?php
-		session_start();
 		if(isset($_SESSION['sellerid'])) {
 			$firstname = $_SESSION['sellerfirstname'];
 			if($_SESSION['sellerid'] == 1) {

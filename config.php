@@ -19,4 +19,49 @@ function listCategory($connection) {
 	} 
 	echo "</ul>";
 }
+
+
+function globalNavigation($connection) {
+	session_start();
+	if(isset($_SESSION['sellerid'])) {
+		$sellerFirstname = $_SESSION['sellerfirstname'];
+		if($_SESSION['sellerid'] == 1) {
+			echo "<ul>
+					<li class='smallcaps'>You're logged in as <b>admin $sellerFirstname</b></li>
+					<li>|</li>
+					<li><a href='logout.php'>Logout</a></li>
+					<li>|</li>
+					<li><a href='register.php'>Register</a></li>
+					<li>|</li>
+					<li><a href='manageAccount.php'>Account</a></li>
+					<li>|</li>
+					<li><a href='howTo.php'>HowTo</a></li>
+				</ul>";
+		} 
+		else {
+			echo "<ul>
+					<li class='smallcaps'>You're logged in as <b>$sellerFirstname</b></li>
+					<li>|</li>
+					<li><a href='logout.php'>Logout</a></li>
+					<li>|</li>
+					<li><a href='register.php'>Register</a></li>
+					<li>|</li>
+					<li><a href='manageAccount.php'>Account</a></li>
+					<li>|</li>
+					<li><a href='howTo.php'>HowTo</a></li>
+				</ul>";
+		}
+	}
+	else {
+		echo "<ul>
+				<li><a href='login.php'>Login</a></li>
+				<li>|</li>
+				<li><a href='register.php'>Register</a></li>
+				<li>|</li>
+				<li><a href='manageAccount.php'>Account</a></li>
+				<li>|</li>
+				<li><a href='howTo.php'>HowTo</a></li>
+			</ul>";
+	}
+}
 ?>

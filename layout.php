@@ -23,15 +23,7 @@ include("config.php");
 				<img src="img/header_slogan.png" alt="Logo Slogan" />
 			</div>
 			<div class="globalnavigation">
-				<ul>
-					<li><a href="login.php">Login</a></li>
-					<li>|</li>
-					<li><a href="register.php">Register</a></li>
-					<li>|</li>
-					<li><a href="manageAccount.php">Account</a></li>
-					<li>|</li>
-					<li><a href="howTo.php">HowTo</a></li>
-				</ul>
+				<? globalNavigation($connection); ?>
 			</div>
 		</div>
 		<div id="contentarea">
