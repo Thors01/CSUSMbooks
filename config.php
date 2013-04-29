@@ -14,9 +14,18 @@ function listCategory($connection) {
 	echo "<h1>Categories</h1><ul>";
 	$sql_category = "SELECT * FROM CATEGORY";
 	$result_category = $connection->query($sql_category);
-	while ($row_category = $result_category->fetch_object()) {       
-		echo "<li><a href=\"index.php?category={$row_category->CategoryId}\">{$row_category->Title}</a></li>";
-	} 
+	while ($row_category = $result_category->fetch_object()) {
+		if(isset($_GET["category"])) {
+			$categoryid = $_GET["category"];
+			if($categoryid == $row_category->CategoryId) {
+				echo "<li><a href=\"index.php?category={$row_category->CategoryId}\"><b>{$row_category->Title}</b></a></li>";
+			} else {
+				echo "<li><a href=\"index.php?category={$row_category->CategoryId}\">{$row_category->Title}</a></li>";			
+			}
+		} else {
+			echo "<li><a href=\"index.php?category={$row_category->CategoryId}\">{$row_category->Title}</a></li>";
+		}
+	}
 	echo "</ul>";
 }
 
