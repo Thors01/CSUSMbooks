@@ -7,17 +7,37 @@ function content($connection) {
 			<tr>
 				<th>Book title <img src="img/arrow_up.png" alt="sort desc" /><img src="img/arrow_down.png" alt="sort asc" /></th>
 				<th>Author <img src="img/arrow_up.png" alt="sort desc" /><img src="img/arrow_down.png" alt="sort asc" /></th>
-			</tr>
-		</thead>
+				<th>Price (in $)<img src="img/arrow_up.png" alt="sort desc" /><img src="img/arrow_down.png" alt="sort asc" /></th>
+		<?php
+			if(isset($_GET["category"])) {
+				$categoryid = $_GET["category"];
+				$sql_offer = "SELECT OfferId, o.Title, Author, Price, c.Title AS CTitle FROM OFFER o, CATEGORY c WHERE CURDATE() < ExpDate AND o.CategoryId = '$categoryid' AND c.CategoryId = o.CategoryId;";
+			} else {
+		?>
+				<th>Category <img src="img/arrow_up.png" alt="sort desc" /><img src="img/arrow_down.png" alt="sort asc" /></th>
+		<?php
+				$sql_offer = "SELECT OfferId, o.Title, Author, Price, c.Title AS CTitle FROM OFFER o, CATEGORY c WHERE CURDATE() < ExpDate AND c.CategoryId = o.CategoryId;";
+			}
+		?>
+				</tr>
+			</thead>
 		<tbody>
-		<?php 
-			$sql_offer = "SELECT OfferId, Title, Author FROM OFFER WHERE CURDATE() < ExpDate;";
+		<?php
 			$result_offer= $connection->query($sql_offer);
-			while ($row_offer = $result_offer->fetch_object()) {    
-			?>   
+			if(isset($_GET["category"])) {
+				while ($row_offer = $result_offer->fetch_object()) {		
+		?>  
 				<tr><td><a href="bookDetails.php?offerid=<?=$row_offer->OfferId?>"><?=$row_offer->Title?></a></td>
-				<td><?=$row_offer->Author?></td></tr>
+				<td><?=$row_offer->Author?></td><td><?=$row_offer->Price?></td></tr>
+		<?php
+				}
+			} else {
+				while ($row_offer = $result_offer->fetch_object()) {
+		?>
+				<tr><td><a href="bookDetails.php?offerid=<?=$row_offer->OfferId?>"><?=$row_offer->Title?></a></td>
+				<td><?=$row_offer->Author?></td><td><?=$row_offer->Price?></td><td><?=$row_offer->CTitle?></td></tr>
 			<?php
+				}
 			}   
 		?> 
 		</tbody>

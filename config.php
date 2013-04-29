@@ -15,7 +15,7 @@ function listCategory($connection) {
 	$sql_category = "SELECT * FROM CATEGORY";
 	$result_category = $connection->query($sql_category);
 	while ($row_category = $result_category->fetch_object()) {       
-		echo "<li><a href=\"#\">{$row_category->Title}</a></li>";
+		echo "<li><a href=\"index.php?category={$row_category->CategoryId}\">{$row_category->Title}</a></li>";
 	} 
 	echo "</ul>";
 }
