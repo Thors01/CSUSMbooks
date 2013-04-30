@@ -5,6 +5,7 @@ function content($connection) {
 	<?php
 		if(isset($_SESSION['sellerid'])) {
 			$firstname = $_SESSION['sellerfirstname'];
+			$sellerId = $_SESSION['sellerid'];
 			if($_SESSION['sellerid'] == 1) {
 				echo "<b>Welcome back Admin $firstname.</b>";
 			} else {
@@ -20,35 +21,54 @@ function content($connection) {
 	<br />
 	<br />
 	<p>Your existing book offers:</p>
-	<table id="offers">
+	<!-- Including jquery script -->
+	<script type="text/javascript" src="js/jquery.tablesorter.js"></script>
+	<script type="text/javascript" src="js/jquery.tablesorter.widgets.min.js"></script>
+	<script>
+		$(function(){
+			$("#offers").tablesorter();
+		});
+	</script>
+	<table id="offers" class="tablesorter">
 		<caption>Book offer</caption>
 		<thead>
 			<tr>
-				<th>Book title</th>
-				<th>Author</th>
-				<th>&nbsp;</th>
+				<th>Book title <img src="img/arrow_up.png" alt="sort desc" /><img src="img/arrow_down.png" alt="sort asc" /></th>
+				<th>Author <img src="img/arrow_up.png" alt="sort desc" /><img src="img/arrow_down.png" alt="sort asc" /></th>
+				<th>ISBN <img src="img/arrow_up.png" alt="sort desc" /><img src="img/arrow_down.png" alt="sort asc" /></th>
+				<th>Price (in $) <img src="img/arrow_up.png" alt="sort desc" /><img src="img/arrow_down.png" alt="sort asc" /></th>
 			</tr>
 		</thead>
 		<tbody>
-			<tr>
-				<td><a href="bookDetails.html">Programming the World Wide Web (7th)</a></td>
-				<td>Robert W. Sebesta</td>
-				<td><a href="modifyOffer.php" class="offer-icon"><img src="img/edit16.png" alt="edit offer" class="offer-icon" /></a><a href="#" class="offer-icon"><img src="img/delete16.png" alt="delete offer" /></a></td>
-			</tr>
-			<tr>
-				<td>Modern Database Management (8th)</td>
-				<td>Jeffrey A. Hoffer</td>
-				<td><a href="modifyOffer.php" class="offer-icon"><img src="img/edit16.png" alt="edit offer" class="offer-icon" /></a><a href="#" class="offer-icon"><img src="img/delete16.png" alt="delete offer" /></a></td>
-			</tr>
-			<tr>
-				<td>Linear Programming</td>
-				<td>Vasek Chvatal</td>
-				<td><a href="modifyOffer.php" class="offer-icon"><img src="img/edit16.png" alt="edit offer" class="offer-icon" /></a><a href="#" class="offer-icon"><img src="img/delete16.png" alt="delete offer" /></a></td>
-			</tr>
+			<?php
+			$sql_offer = "SELECT OfferId, Title, Author, Isbn, Price FROM OFFER WHERE SellerId = $sellerId";
+			$result_offer = $connection->query($sql_offer);
+			while ($row_offer = $result_offer->fetch_object()) {	
+			?>
+				<tr>
+					<td><a href="bookDetails.php?offerid=<?=$row_offer->OfferId?>"><?=$row_offer->Title?></a></td>
+					<td><?=$row_offer->Author?></td>
+					<td><?php
+					if (strlen($row_offer->Isbn) == 13) {
+						$isbn = substr($row_offer->Isbn, 0, 3)."-".substr($row_offer->Isbn, 3, 9);
+						echo $isbn;
+					}
+					if (strlen($row_offer->Isbn) == 10) {
+						$isbn = substr($row_offer->Isbn, 0, 1)."-".substr($row_offer->Isbn, 1, 9);
+						echo $isbn;
+					}
+					?>
+					</td>
+					<td><?=$row_offer->Price?></td>
+				</tr>
+			<?php
+			}
+			?>
 		</tbody>
 	</table>
 <?php
-	} else {
+	} 
+	else {
 		echo "Please login or register first.";
 	}
 }
