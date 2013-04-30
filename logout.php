@@ -7,7 +7,4 @@ function content($connection) {
 	session_destroy();
 	header("Location: index.php");
 }
-
-include("layout.php");
-
 ?>

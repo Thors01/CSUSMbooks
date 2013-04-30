@@ -83,7 +83,7 @@ function content($connection) {
 	
 	<div class="clear"></div>
 	<div class="submitbar">
-	<input type="button" name="button" id="button" value="contact seller" onclick="window.location='contactSeller.html';"/>
+	<input type="button" name="button" id="button" value="contact seller" onclick="window.location='contactSeller.php';"/>
 	</div>
 <?php
 }
