@@ -23,7 +23,14 @@ function content($connection) {
 		?>
 				<th>Category <img src="img/arrow_up.png" alt="sort desc" /><img src="img/arrow_down.png" alt="sort asc" /></th>
 		<?php
-				$sql_offer = "SELECT OfferId, o.Title, Author, Price, c.Title AS CTitle FROM OFFER o, CATEGORY c WHERE CURDATE() < ExpDate AND c.CategoryId = o.CategoryId;";
+				if(isset($_POST['search_string'])) {
+					$search = $_POST['search_string'];
+					$sql_offer = "SELECT OfferId, o.Title, Author, Price, c.Title AS CTitle FROM OFFER o, CATEGORY c WHERE CURDATE() < ExpDate AND c.CategoryId = o.CategoryId
+					AND (o.title LIKE '%$search%' OR ISBN like '%$search%');";
+					echo "<b>Here is the result for your search '$search':</b>";
+				} else {
+					$sql_offer = "SELECT OfferId, o.Title, Author, Price, c.Title AS CTitle FROM OFFER o, CATEGORY c WHERE CURDATE() < ExpDate AND c.CategoryId = o.CategoryId;";
+				}
 			}
 		?>
 				</tr>
@@ -50,7 +57,7 @@ function content($connection) {
 				<td><?=$row_offer->Author?></td><td><?=$row_offer->Price?></td><td><?=$row_offer->CTitle?></td></tr>
 			<?php
 				}
-			}   
+			} 
 		?> 
 		</tbody>
 	</table>	

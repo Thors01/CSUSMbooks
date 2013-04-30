@@ -9,8 +9,10 @@ function content($connection) {
 	$expDate = '';
 	$notes = '';
 	$price = '';
-	$sellerId = $_SESSION['sellerid'];
-	$sellerFirstname = $_SESSION['sellerfirstname'];
+	if(isset($_SESSION['sellerid']) && isset($_SESSION['sellerfirstname'])) {
+		$sellerId = $_SESSION['sellerid'];
+		$sellerFirstname = $_SESSION['sellerfirstname'];
+	}
 	
 	if(isset($_POST['submit'])) {
 		$title = $_POST['title'];
