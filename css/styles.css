@@ -195,6 +195,16 @@ h1 {
 	text-transform:uppercase;
 }
 
+h2 {
+	height:15px;
+	line-height:15px;
+	margin:0 0 8px 0;
+	color:#970000;
+	font-weight:bold;
+	font-size:1.1em;
+	text-transform:uppercase;
+}
+
 /************************************************************************************/
 /* NAVIGATION																		*/
 /************************************************************************************/
