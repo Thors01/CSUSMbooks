@@ -1,7 +1,14 @@
 <?php    
 function content($connection) {
 ?>	
-	<table id="offers">
+<script type="text/javascript" src="js/tablesort/js/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="js/tablesort/js/jquery.tablesorter.widgets.min.js"></script>
+<script>
+	$(function(){
+		$("#offers").tablesorter();
+	});
+</script>
+	<table id="offers" class="tablesorter">
 		<caption>Book offer</caption>
 		<thead>
 			<tr>
