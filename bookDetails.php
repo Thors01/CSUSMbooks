@@ -32,10 +32,21 @@ function content($connection) {
 	$sql_offer_condition = "SELECT Description FROM `CONDITION` WHERE ConditionId=$conditionId";
 	$conditionDescription = mysqli_fetch_array($connection->query($sql_offer_condition));
 	
+	// convert isbn
+	// /^[0-9]([-| ]?[0-9]){9,12}$/
+	// substr(string,start,length)
+	if (strlen($bookDetails[4]) == 13) {
+		$isbn = substr($bookDetails[4], 0, 3)."-".substr($bookDetails[4], 3, 9);
+	}
+	if (strlen($bookDetails[4]) == 10) {
+		$isbn = substr($bookDetails[4], 0, 1)."-".substr($bookDetails[4], 1, 9);
+	}
+	
+	
 ?>	
 	<h1>Book details</h1>
 		
-	<img src="img/<?= $bookDetails[11] ?>" alt="Example Book" id="bookcover" />
+	<img src="<?= $bookDetails[11] ?>" alt="Example Book" id="bookcover" />
 	
 	<table id="bookdetails">
 		<caption>Book Details</caption>
@@ -53,7 +64,7 @@ function content($connection) {
 		</tr>
 		<tr>
 			<td class="leftred">ISBN:</td>
-			<td><?= $bookDetails[4] ?></td>
+			<td><?= $isbn ?></td>
 		</tr>
 		<tr>
 			<td class="leftred">Category:</td>
@@ -64,17 +75,19 @@ function content($connection) {
 			<td><?= $bookDetails[9] ?></td>
 		</tr>
 		<tr>
-			<td class="leftred">Expires on:</td>
-			<td><?= $bookDetails[10] ?></td>
-		</tr>
-		<tr>
 			<td class="leftred">Book condition:</td>
 			<td><?= $conditionDescription[0] ?></td>
 		</tr>
+		<?php
+		if ($bookDetails[12] != "") {
+		?>
 		<tr>
 			<td class="leftred">Note from seller:</td>
 			<td><?= $bookDetails[12] ?></td>
 		</tr>
+		<?php
+		}
+		?>
 		<tr>
 			<td class="leftred">Price:</td>
 			<td>$ <?= $bookDetails[7] ?></td>

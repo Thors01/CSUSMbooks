@@ -342,6 +342,8 @@ img#bookcover {
 	float:left;
 	border:1px solid #202020;
 	margin:0 20px 0 0;
+	max-width:250px;
+	height:auto;
 }
 
 table#bookdetails tr td {

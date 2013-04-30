@@ -25,7 +25,6 @@ if ($_FILES['file']['size'] != 0) {
 					$i++;
 				}
 				else {
-					echo $filename."_".$i.".".$extension;
 					move_uploaded_file($_FILES["file"]["tmp_name"], "upload/".$filename."_".$i.".".$extension);
 					$exists = true;
 				}
@@ -37,5 +36,8 @@ if ($_FILES['file']['size'] != 0) {
 	else {
 		echo "Invalid file! Your file should be gif, jpg or png and smaller than 1024kB.";
 	}
+}
+else {
+	$imagePath = "img/example_cover.png";
 }
 ?>
