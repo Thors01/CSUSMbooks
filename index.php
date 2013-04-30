@@ -1,8 +1,9 @@
 <?php    
 function content($connection) {
-?>	
-<script type="text/javascript" src="js/tablesort/js/jquery.tablesorter.js"></script>
-<script type="text/javascript" src="js/tablesort/js/jquery.tablesorter.widgets.min.js"></script>
+?>
+<!-- Including jquery script -->
+<script type="text/javascript" src="js/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="js/jquery.tablesorter.widgets.min.js"></script>
 <script>
 	$(function(){
 		$("#offers").tablesorter();

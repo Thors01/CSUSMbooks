@@ -9,7 +9,7 @@ include("config.php");
 		<title>Get more for your old books! Test</title>
 		<link rel="stylesheet" media="screen" type="text/css" href="css/reset.css" />
 		<link rel="stylesheet" media="screen" type="text/css" href="css/styles.css" />
-		<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+		<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script> <!-- Including jquery script -->
         <script type="text/javascript" src="js/validation.js"></script>
 	</head>
 	<body>
