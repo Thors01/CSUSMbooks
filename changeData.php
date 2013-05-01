@@ -7,8 +7,7 @@ function content($connection) {
 		echo "<p>Please login or register first.</p>";
 	} else {
 		if(isset($_POST['submit'])) {
-			if((empty($_POST['firstname']) || empty($_POST['lastname']) || !preg_match('/^[a-zA-Z]+$/', $_POST['firstname']) || !preg_match('/^[a-zA-Z]+$/', $_POST['lastname']))
-				|| strlen($_POST['password']) < 6 && (empty($_POST['phone']) || !preg_match('/\d{7,}+$/', $_POST['phone']))) {
+			if((empty($_POST['firstname']) || empty($_POST['lastname']) || !preg_match('/^[a-zA-Z]+$/', $_POST['firstname']) || !preg_match('/^[a-zA-Z]+$/', $_POST['lastname']))	|| strlen($_POST['password']) < 6 || (empty($_POST['phone']) || !preg_match('/^[0-9 -.()]{6,}$/', $_POST['phone']))) {
 				$error = "<p class='error'>You did not fill in every field properly.</p>";
 			} else {
 				if(empty($_POST['password']) || empty($_POST['confirmpassword'])) {
@@ -26,7 +25,11 @@ function content($connection) {
 		if(isset($_POST['submit']) && empty($error)) {
 			$firstname = $_POST['firstname'];
 			$lastname = $_POST['lastname'];
-			$phone = $_POST['phone'];
+			$phone = str_replace("-", "", $_POST['phone']);
+			$phone = str_replace(" ", "", $phone);
+			$phone = str_replace("(", "", $phone);
+			$phone = str_replace(")", "", $phone);
+			$phone = str_replace(".", "", $phone);
 			$sellerid = $_SESSION['sellerid'];
 			if($pw == "no") {
 				$sql_data = "UPDATE SELLER SET `FirstName`='$firstname', `LastName`='$lastname', `Phone`='$phone' WHERE `SellerId`=$sellerid;";
@@ -75,8 +78,13 @@ Please fill in the following fields:</p>
 				<td><?php echo "$mail"; ?></td>
 			</tr>
 			<tr>
+<<<<<<< HEAD
 				<td><label for="phone">(Phone:)</label></td>
 				<td><input type="text" value="<?= htmlspecialchars($phone) ?>" name="phone" id="phone" data-validation-pattern="^[-, ,0-9]{6,}$" data-validation-message="Please enter a valid phone number." /></td>
+=======
+				<td><label for="phone">Phone:</label></td>
+				<td><input type="text" value="<?= htmlspecialchars($phone) ?>" name="phone" id="phone" data-validation-pattern="^[0-9 -.()]{6,}$" data-validation-message="Please enter a valid phone number." /></td>
+>>>>>>> phone pattern to ^[0-9 -.()]{6,}$
 			</tr>
 			<tr>
 				<td><label for="password">Password:</label></td>

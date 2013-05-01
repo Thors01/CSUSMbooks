@@ -12,7 +12,7 @@
 			</tr>
 			<tr>
 				<td><label for="phone">Your phone:</label></td>
-				<td><input type="text" name="phone" id="phone" value="<?php echo isset($_POST["phone"])?$_POST["phone"]:""; ?>" data-validation-pattern="^[0-9]{6,}$" data-validation-message="Please enter a valid phone number." /></td>
+				<td><input type="text" name="phone" id="phone" value="<?php echo isset($_POST["phone"])?$_POST["phone"]:""; ?>" data-validation-pattern="^[0-9 -.()]{6,}$" data-validation-message="Please enter a valid phone number." /></td>
 			</tr>
 			<tr>
 				<td><label for="subject">Subject:</label></td>
