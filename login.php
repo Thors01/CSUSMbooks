@@ -49,6 +49,11 @@ function content($connection) {
 				</tr>
 			</tbody>
 		</table>
+		<br />
+		<p><b>Just for testing:</b><br />
+		Admin login data:<br />
+		Mail: admin@csusm.edu<br />
+		Password: admin</p>
 		
 		<div class="submitbar">
 		<input type="submit" name="submit" id="submit" value="login" />
