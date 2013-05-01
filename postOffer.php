@@ -73,6 +73,7 @@ function content($connection) {
 				else {
 					echo "<h1>Post new book offer</h1>";
 					echo "<p>You succesfully posted a new book offer.</p>";
+					
 				}				
 			}
 		}
