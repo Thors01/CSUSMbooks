@@ -3,7 +3,7 @@ function content($connection) {
 ?>
 <!-- Including jquery script -->
 <script type="text/javascript" src="js/jquery.tablesorter.js"></script>
-<script type="text/javascript" src="js/jquery.tablesorter.widgets.min.js"></script>
+<script type="text/javascript" src="js/jquery.tablesorter.min.js"></script>
 <script>
 	$(function(){
 		$("#offers").tablesorter();
