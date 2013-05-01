@@ -8,14 +8,12 @@ function content($connection) {
 			$sellerId = $_SESSION['sellerid'];
 			if($_SESSION['sellerid'] == 1) {
 				$isAdmin = true;
-				echo "<b>Welcome back $firstname (Admin).</b>";
+				echo "<b>Welcome back $firstname (Admin).</b><p>Here you can manage your account and existing offers.</p>";
 			} else {
 				$isAdmin = false;
-				echo "<b>Welcome back $firstname.</b>";
+				echo "<b>Welcome back $firstname.</b><p>Here you can manage your account.</p>";
 			}
 	?>
-	<br />
-	<p>Here you can manage your account.</p>
 	<a href="changeData.php" class="button">Change your data</a><br />
 	<a href="postOffer.php" class="button">Post new book offer</a>
 	<br />
