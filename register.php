@@ -6,8 +6,8 @@ function content($connection) {
 		if(isset($_POST['submit'])) {
 			if((empty($_POST['firstname']) || empty($_POST['lastname']) || empty($_POST['mail']) || empty($_POST['confirmmail']) || empty($_POST['password']) || empty($_POST['confirmpassword'])
 			|| !preg_match('/^[a-zA-Z]+$/', $_POST['firstname']) || !preg_match('/^[a-zA-Z]+$/', $_POST['lastname']) || !preg_match('/^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,3})$/' ,$_POST['mail'])
-			|| $_POST['mail'] != $_POST['confirmmail'] || $_POST['password'] != $_POST['confirmpassword'])
-			&& (empty($_POST['phone']) || !preg_match('/\d{7,}+$/', $_POST['phone']))) { // PW verschlüsselt darstellen und übertragen usw.
+			|| $_POST['mail'] != $_POST['confirmmail'] || $_POST['password'] != $_POST['confirmpassword']) || strlen($_POST['password']) < 6
+			&& (empty($_POST['phone']) || !preg_match('/\d{7,}+$/', $_POST['phone']))) {
 				$error = "<p class=\"error\">Please check your input. You have to fill in all fields besides phone number.</p>";
 			} else {
 				$mail = $_POST['mail'];
@@ -36,7 +36,7 @@ function content($connection) {
 				die('Error: ' . mysqli_error($connection));
 			} else {
 				echo "<p>You succesfully created a new user account.</p>";
-				$mail_body = "Hi $firstname,\nyou succesfully created an user account at CSUSMBooks."; // Text must be improved
+				$mail_body = "Hi $firstname,\nyou succesfully created an user account at CSUSMBooks.";
 				$subject = "New account at CSUSMBooks";
 				
 				// following code gets email from admin
@@ -46,8 +46,8 @@ function content($connection) {
 				
 				$header = "From: CSUSM Books<$recipient[3]>\r\n";
 		
-				if (mail($mail, $subject, $mail_body, $header)) { // How can the user confirm his email address?
-					echo "<p>You got an email to confirm your email-address.</p>";
+				if (mail($mail, $subject, $mail_body, $header)) {
+					echo "<p>You got an email with the confirmation of creating a new user account.</p>";
 				} else {
 					echo "<p class=\"error\">An error occured. Unfortunately we could not send you a confirmation email.</p>";
 				}
