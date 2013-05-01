@@ -2,10 +2,7 @@
 function content($connection) {
 ?>	
 	<h1>Imprint</h1>
-	<p>Responsible Admins:<br />
-		Firstname Lastname<br />
-		<br />
-		Phone Number:<br />
+	<p>Phone Number:<br />
 		760.750.4000<br />
 		<br />
 		Mailing Address:<br />

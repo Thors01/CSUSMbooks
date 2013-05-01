@@ -4,12 +4,12 @@ function content($connection) {
 <h1>Change your personal data</h1>
 <?php
 	if (!isset($_SESSION['sellerid'])) {
-		echo "Please login or register first.";
+		echo "<p>Please login or register first.</p>";
 	} else {
 		if(isset($_POST['submit'])) {
 			if((empty($_POST['firstname']) || empty($_POST['lastname']) || !preg_match('/^[a-zA-Z]+$/', $_POST['firstname']) || !preg_match('/^[a-zA-Z]+$/', $_POST['lastname']))
 				|| (empty($_POST['phone']) || !preg_match('/\d{7,}+$/', $_POST['phone']))) {
-				$error = "<p class=\"error\">You did not fill in every field properly.</p>";
+				$error = "<p class='error'>You did not fill in every field properly.</p>";
 			} else {
 				if(empty($_POST['password']) || empty($_POST['confirmpassword'])) {
 					$pw = "no";
@@ -17,7 +17,7 @@ function content($connection) {
 					if($_POST['password'] == $_POST['confirmpassword']) {
 						$pw = "yes";
 					} else {
-						$error = "<p class=\"error\">Your passwords do not match.</p>";
+						$error = "<p class='error'>Your passwords do not match.</p>";
 					}
 				}
 			}
@@ -30,16 +30,16 @@ function content($connection) {
 			$sellerid = $_SESSION['sellerid'];
 			if($pw == "no") {
 				$sql_data = "UPDATE SELLER SET `FirstName`='$firstname', `LastName`='$lastname', `Phone`='$phone' WHERE `SellerId`=$sellerid;";
-				$confirm = "Your password is still the same.";
+				$confirm = "<p>Your password is still the same.</p>";
 			} else {
 				$password = md5($_POST['password']);
 				$sql_data = "UPDATE SELLER SET `FirstName`='$firstname', `LastName`='$lastname', `Phone`='$phone', `Password`='$password' WHERE SellerId=$sellerid;";					
-				$confirm = "Don't forget: You changed your password, too.";
+				$confirm = "<p>Don't forget: You changed your password, too.</p>";
 			}
 			if(mysqli_query($connection, $sql_data)) {
 				echo "<p>You successfully changed your data. $confirm</p>";
 			} else {
-				echo "<p>There was a connection error. Please try again.</p>";
+				echo "<p class='error'>There was a connection error. Please try again.</p>";
 			}
 		} else {
 ?>

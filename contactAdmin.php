@@ -12,17 +12,20 @@ function content($connection) {
 		if(isset($_POST['submit']) && empty($error)) {
 			$Name = $_POST['name'];
 			$email = $_POST['mail'];
-			$recipient = "kraem01@cougars.csusm.edu"; // get Email from database		
-			if(isset($_POST['phone']) && $_POST['phone'] != "") {
-				$mail_body = $_POST['message'] . "\n\nYou can also contact the user by phone: " . $_POST['phone'] . ".";
-			} else {
-				$mail_body = $_POST['message'];
-			}
+			
+			// the following code gets mail address from admin because he is seller with id=1
+			$sql_recipient = "SELECT * FROM SELLER WHERE SellerId=1";
+			$result_recipient = $connection->query($sql_recipient);
+			$array_recipient = mysqli_fetch_array($result_recipient);
+			$recipient = $array_recipient[3];		
+			
+			$mail_body = "You got an email by CSUSMbooks:\n\n'" . $_POST['message'] . "'\n\nYou can also contact the user by phone: " . $_POST['phone'] . ".";
+			
 			$subject = $_POST['subject'];
 			$header = "From: ". $Name . " <" . $email . ">\r\n";
 	
 			if (mail($recipient, $subject, $mail_body, $header)) {
-				echo "<p>You succesfully send an email. We will respond as soon as possible.</p>";
+				echo "<p>You succesfully sent an email. We will respond as soon as possible.</p>";
 			} else {
 				echo "An error occured. Please try again.";
 			}

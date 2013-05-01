@@ -7,7 +7,7 @@ function content($connection) {
 	<?php 
 		if(isset($_POST['submit'])) {
 			if(empty($_POST['mail']) || empty($_POST['password'])) {
-				$error = "Please check your input. You have to fill in all fields.";
+				$error = "<p class='error'>Please check your input. You have to fill in all fields.</p>";
 			} else {
 				$mail = $_POST['mail'];
 				$password = md5($_POST['password']);
@@ -16,7 +16,7 @@ function content($connection) {
 				$login = mysqli_fetch_array($result_login);
 
 				if($login == "") {				
-					$error = "You did not enter the correct login data.";
+					$error = "<p class='error'>You did not enter the correct login data.</p>";
 				}
 			}
 		}
@@ -32,7 +32,7 @@ function content($connection) {
 			exit();
 		} else {
 			if(!empty($error)) {
-				echo "<font color=\"red\"><b>" . $error . "</b></font><br>";
+				echo $error;
 			}
 	?>
 	<form action="login.php" method="post">
