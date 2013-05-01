@@ -23,8 +23,37 @@ function content($connection) {
 			}
 		} 
 		if(isset($_POST['submit']) && empty($error)) {
-			//Send the user a email with a new password and store the new one in the database?
-			echo "You will get an email with your new password soon.";
+			$mail = $_POST['mail'];
+			// Create a random password with length 9
+			$password = "";
+			mt_srand((double)microtime() * 1000000);
+			$charset = "123456789ABCDEFGHIJKLMNPQRSTUVWXYZ!?";
+			$length  = strlen($charset)-1;
+			$code    = '';
+			for($i=0;$i<10;$i++) {
+				$password .= $charset{mt_rand(0, $length)};
+			}
+			$passworde = md5($password);
+			$sql_data = "UPDATE SELLER SET `Password`='$passworde' WHERE `Mail`='$mail';";
+			if (!mysqli_query($connection, $sql_data)) {
+				die('Error: ' . mysqli_error($connection));
+			} else {
+				$mail_body = "Hi,
+
+your new password is: $password
+Please change it after your first login.
+					
+Best regards,
+The CSUSM Books-Team"; // Text must be improved
+				$subject = "CSUSM Books: New password request";
+				$header = "From: CSUSM Books <kraem01@cougars.csusm.edu>\r\n"; // insert admin-mail
+		
+				if (mail($mail, $subject, $mail_body, $header)) {
+					echo "<p>You got an email with your new password.</p>";
+				} else {
+					echo "An error occured. Unfortunately we could not send you an email with your new password.";
+				}
+			}
 		} else {
 			if(!empty($error)) {
 				echo "<font color=\"red\"><b>" . $error . "</b></font><br>";
