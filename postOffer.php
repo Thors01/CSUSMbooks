@@ -62,10 +62,9 @@ function content($connection) {
 				$modify = false;
 			}
 			
-			if (!mysqli_query($connection,$sqlstring))
-			  {
-			  die('Error: ' . mysqli_error($connection));
-			  }
+			if (!mysqli_query($connection,$sqlstring)) {
+				  die('Error: ' . mysqli_error($connection));
+			}
 			else {
 				if ($modify) {
 					echo "<h1>Modify existing book offer</h1>";

@@ -10,6 +10,7 @@ function content($connection) {
 				$isAdmin = true;
 				echo "<b>Welcome back $firstname (Admin).</b>";
 			} else {
+				$isAdmin = false;
 				echo "<b>Welcome back $firstname.</b>";
 			}
 	?>
@@ -71,7 +72,9 @@ function content($connection) {
 						<a href="modifyOffer.php?offerid=<?=$row_offer->OfferId?>" class="offer-icon">
 							<img src="img/edit16.png" alt="edit offer" class="offer-icon" />
 						</a>
-						<a href="#" class="offer-icon"><img src="img/delete16.png" alt="delete offer" /></a>
+						<a href="deleteOffer.php?offerid=<?=$row_offer->OfferId?>" class="offer-icon">
+							<img src="img/delete16.png" alt="delete offer" />
+						</a>
 					</td>
 				</tr>
 			<?php
