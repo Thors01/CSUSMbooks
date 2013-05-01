@@ -36,7 +36,7 @@ function globalNavigation($connection) {
 		$sellerFirstname = $_SESSION['sellerfirstname'];
 		if($_SESSION['sellerid'] == 1) {
 			echo "<ul>
-					<li class='smallcaps'>You're logged in as <b>admin $sellerFirstname</b></li>
+					<li class='smallcaps'>You're logged in as <b>$sellerFirstname (Admin)</b></li>
 					<li>|</li>
 					<li><a href='logout.php'>Logout</a></li>
 					<li>|</li>

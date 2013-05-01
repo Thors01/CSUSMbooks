@@ -7,7 +7,8 @@ function content($connection) {
 			$firstname = $_SESSION['sellerfirstname'];
 			$sellerId = $_SESSION['sellerid'];
 			if($_SESSION['sellerid'] == 1) {
-				echo "<b>Welcome back Admin $firstname.</b>";
+				$isAdmin = true;
+				echo "<b>Welcome back $firstname (Admin).</b>";
 			} else {
 				echo "<b>Welcome back $firstname.</b>";
 			}
@@ -37,11 +38,17 @@ function content($connection) {
 				<th>Author <img src="img/arrow_up.png" alt="sort desc" /><img src="img/arrow_down.png" alt="sort asc" /></th>
 				<th>ISBN <img src="img/arrow_up.png" alt="sort desc" /><img src="img/arrow_down.png" alt="sort asc" /></th>
 				<th>Price (in $) <img src="img/arrow_up.png" alt="sort desc" /><img src="img/arrow_down.png" alt="sort asc" /></th>
+				<th>&nbsp;</th>
 			</tr>
 		</thead>
 		<tbody>
 			<?php
-			$sql_offer = "SELECT OfferId, Title, Author, Isbn, Price FROM OFFER WHERE SellerId = $sellerId";
+			if ($isAdmin) {
+				$sql_offer = "SELECT OfferId, Title, Author, Isbn, Price FROM OFFER";
+			}
+			else {
+				$sql_offer = "SELECT OfferId, Title, Author, Isbn, Price FROM OFFER WHERE SellerId = $sellerId";
+			}
 			$result_offer = $connection->query($sql_offer);
 			while ($row_offer = $result_offer->fetch_object()) {	
 			?>
@@ -50,7 +57,7 @@ function content($connection) {
 					<td><?=$row_offer->Author?></td>
 					<td><?php
 					if (strlen($row_offer->Isbn) == 13) {
-						$isbn = substr($row_offer->Isbn, 0, 3)."-".substr($row_offer->Isbn, 3, 9);
+						$isbn = substr($row_offer->Isbn, 0, 3)."-".substr($row_offer->Isbn, 3, 10);
 						echo $isbn;
 					}
 					if (strlen($row_offer->Isbn) == 10) {
@@ -60,6 +67,12 @@ function content($connection) {
 					?>
 					</td>
 					<td><?=$row_offer->Price?></td>
+					<td>
+						<a href="modifyOffer.php?offerid=<?=$row_offer->OfferId?>" class="offer-icon">
+							<img src="img/edit16.png" alt="edit offer" class="offer-icon" />
+						</a>
+						<a href="#" class="offer-icon"><img src="img/delete16.png" alt="delete offer" /></a>
+					</td>
 				</tr>
 			<?php
 			}

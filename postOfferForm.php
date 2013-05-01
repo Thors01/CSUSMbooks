@@ -27,9 +27,15 @@
 					?>
 					<select id="category" name="category">
 					<?php 
-						while ($row_category = $result_category->fetch_object()) 
-						{       
-						echo "<option value='{$row_category->CategoryId}'>{$row_category->Title}</option>\n";
+						while ($row_category = $result_category->fetch_object()) {
+					?> 
+						<option value='<?= $row_category->CategoryId ?>' 
+					<?php
+							if ($row_category->CategoryId == $category)
+								echo 'selected="selected"';
+					?>
+						><?= $row_category->Title ?></option>
+					<?php
 						}   
 					?> 
 					</select>
@@ -42,11 +48,17 @@
 						$sql_condition = "SELECT * FROM `CONDITION`";
 						$result_condition = $connection->query($sql_condition);
 					?>
-					<select id="condition" name="condition">    
+					<select id="condition" name="condition">
 					<?php 
-						while ($row_condition = $result_condition->fetch_object()) 
-						{       
-						echo "<option value='{$row_condition->ConditionId}'>{$row_condition->Description}</option>\n";
+						while ($row_condition = $result_condition->fetch_object()) {
+						?> 
+						<option value='<?= $row_condition->ConditionId ?>' 
+						<?php
+							if ($row_condition->ConditionId == $condition)
+								echo 'selected="selected"';
+						?>
+						><?= $row_condition->Description ?></option>
+						<?php
 						}   
 					?> 
 					</select>
@@ -66,11 +78,37 @@
 			</tr>
 			<tr>
 				<td><label for="file">Picture:</label></td>
-				<td><input type="file" name="file" id="file" /></td>
+				<td>
+					<?php
+						if ($imagePath != '') {
+					?>
+						<p class="tabletext">You've already uploaded this image: <a href="<?= $imagePath ?>"><?= $imagePath ?></a><br />
+						In order to change it, please select a new file:</p>
+					<?php
+						}
+						else {
+					?>
+							<p class="tabletext">Here you can upload an image for your offer:</p>
+					<?php
+						}
+					?>
+					<input type="file" name="file" id="file" /></td>
 			</tr>
 		</tbody>
 	</table>
 	<div class="submitbar">
-	<input type="submit" name="submit" id="submit" value="post new book offer" />
+	<?php
+		if ($offerid != '') {
+	?>
+			<input type="hidden" name="offerid" value="<?= htmlspecialchars($offerid) ?>" />
+			<input type="submit" name="submit" id="submit" value="save changes" />
+	<?php
+		}
+		else {
+	?>	
+		<input type="submit" name="submit" id="submit" value="post new book offer" />
+	<?php
+		}
+	?>
 	</div>
 </form>

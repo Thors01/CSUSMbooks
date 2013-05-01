@@ -11,7 +11,7 @@ function content($connection) {
 	$price = '';
 	
 	if (!isset($_GET["offerid"])) {
-		echo "blub";
+		echo "Sorry, there is no offer.";
 	}
 	else {
 		$offerid = $_GET["offerid"];
