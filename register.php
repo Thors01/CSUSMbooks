@@ -8,7 +8,7 @@ function content($connection) {
 			|| !preg_match('/^[a-zA-Z]+$/', $_POST['firstname']) || !preg_match('/^[a-zA-Z]+$/', $_POST['lastname']) || !preg_match('/^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,3})$/' ,$_POST['mail'])
 			|| $_POST['mail'] != $_POST['confirmmail'] || $_POST['password'] != $_POST['confirmpassword'])
 			&& (empty($_POST['phone']) || !preg_match('/\d{7,}+$/', $_POST['phone']))) { // PW verschlüsselt darstellen und übertragen usw.
-				$error = "Please check your input. You have to fill in all fields besides phone number.";
+				$error = "<p class=\"error\">Please check your input. You have to fill in all fields besides phone number.</p>";
 			} else {
 				$mail = $_POST['mail'];
 				if(strpos($mail, "csusm.edu")) { // javascript for this part is different?!
@@ -17,11 +17,10 @@ function content($connection) {
 					$mail = mysqli_fetch_array($result_mailcheck);
 
 					if($mail != "") {				
-						$error = "There is already an user with your email address.
-						<br> If you forgot your password you can order a new one <a href='forgotPassword.php'>here</a>.<br>";
+						$error = "<p class=\"error\">There is already an user with your email address.<br /> If you forgot your password you can order a new one <a href='forgotPassword.php'>here</a>.</p>";
 					}
 				} else {
-					$error = "Please enter a valid csusm.edu email address";
+					$error = "<p class=\"error\">Please enter a valid csusm.edu email address</p>";
 				}
 			}
 		}
@@ -37,20 +36,25 @@ function content($connection) {
 				die('Error: ' . mysqli_error($connection));
 			} else {
 				echo "<p>You succesfully created a new user account.</p>";
-				$mail_body = "Hi $firstname,
-	you succesfully created an user account at CSUSMBooks."; // Text must be improved
+				$mail_body = "Hi $firstname,\nyou succesfully created an user account at CSUSMBooks."; // Text must be improved
 				$subject = "New account at CSUSMBooks";
-				$header = "From: CSUSM Books<kraem01@cougars.csusm.edu>\r\n"; // insert admin-mail
+				
+				// following code gets email from admin
+				$sql_receipient = "SELECT * FROM SELLER WHERE SellerId=1";
+				$result_receipient = $connection->query($sql_receipient);
+				$recipient = mysqli_fetch_array($result_receipient);
+				
+				$header = "From: CSUSM Books<$recipient[3]>\r\n";
 		
 				if (mail($mail, $subject, $mail_body, $header)) { // How can the user confirm his email address?
 					echo "<p>You got an email to confirm your email-address.</p>";
 				} else {
-					echo "An error occured. Unfortunately we could not send you a confirmation email.";
+					echo "<p class=\"error\">An error occured. Unfortunately we could not send you a confirmation email.</p>";
 				}
 			}
 		} else {
 			if(!empty($error)) {
-				echo "<font color=\"red\"><b>" . $error . "</b></font><br>";
+				echo $error;
 			}
 	?>
 	<p>Here you can create a new account for selling your books.<br/>

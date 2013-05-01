@@ -9,7 +9,7 @@ function content($connection) {
 		if(isset($_POST['submit'])) {
 			if((empty($_POST['firstname']) || empty($_POST['lastname']) || !preg_match('/^[a-zA-Z]+$/', $_POST['firstname']) || !preg_match('/^[a-zA-Z]+$/', $_POST['lastname']))
 				|| (empty($_POST['phone']) || !preg_match('/\d{7,}+$/', $_POST['phone']))) {
-				$error = "You did not fill in every field properly.";
+				$error = "<p class=\"error\">You did not fill in every field properly.</p>";
 			} else {
 				if(empty($_POST['password']) || empty($_POST['confirmpassword'])) {
 					$pw = "no";
@@ -17,7 +17,7 @@ function content($connection) {
 					if($_POST['password'] == $_POST['confirmpassword']) {
 						$pw = "yes";
 					} else {
-						$error = "Your passwords do not match.";
+						$error = "<p class=\"error\">Your passwords do not match.</p>";
 					}
 				}
 			}
@@ -37,9 +37,9 @@ function content($connection) {
 				$confirm = "Don't forget: You changed your password, too.";
 			}
 			if(mysqli_query($connection, $sql_data)) {
-				echo "You successfully changed your data. $confirm";
+				echo "<p>You successfully changed your data. $confirm</p>";
 			} else {
-				echo "There was a connection error. Please try again.";
+				echo "<p>There was a connection error. Please try again.</p>";
 			}
 		} else {
 ?>
@@ -47,7 +47,7 @@ function content($connection) {
 Please fill in the following fields:</p>
 <?php
 			if(!empty($error)) {
-				echo "<font color=\"red\"><b>" . $error . "</b></font><br>";
+				echo $error;
 			}
 			$sellerid = $_SESSION['sellerid'];
 			$sql_data = "SELECT * FROM SELLER WHERE SellerId=$sellerid";
@@ -75,8 +75,8 @@ Please fill in the following fields:</p>
 				<td><?php echo "$mail"; ?></td>
 			</tr>
 			<tr>
-				<td><label for="phone">(Phone:)</label></td>
-				<td><input type="text" value="<?= htmlspecialchars($phone) ?>" name="phone" id="phone" data-validation-pattern="^[0-9]{6,}$" data-validation-message="Please enter a valid phone number." /></td>
+				<td><label for="phone">Phone:</label></td>
+				<td><input type="text" value="<?= htmlspecialchars($phone) ?>" name="phone" id="phone" data-validation-pattern="^[-, ,0-9]{6,}$" data-validation-message="Please enter a valid phone number." /></td>
 			</tr>
 			<tr>
 				<td><label for="password">Password:</label></td>

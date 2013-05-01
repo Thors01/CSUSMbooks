@@ -12,7 +12,8 @@ input {
 	cursor:pointer;
 }
 
-input[type=text] {
+input[type=text],
+input[type=password] {
 	cursor:text !important;
 }
 
@@ -270,6 +271,7 @@ h2 {
 table#inputfields tr td {
 	padding:4px 0;
 	vertical-align:top;
+	line-height: 20px;
 }
 
 table#inputfields label {
