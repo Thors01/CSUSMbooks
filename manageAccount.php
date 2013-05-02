@@ -70,7 +70,10 @@ function content($connection) {
 						<a href="modifyOffer.php?offerid=<?=$row_offer->OfferId?>" class="offer-icon">
 							<img src="img/edit16.png" alt="edit offer" class="offer-icon" />
 						</a>
-						<a href="deleteOffer.php?offerid=<?=$row_offer->OfferId?>" class="offer-icon">
+						
+						
+						
+						<a href="deleteOffer.php?offerid=<?=$row_offer->OfferId?>" class="offer-icon" onclick="return confirm('Do you really want to delete this offer?')">
 							<img src="img/delete16.png" alt="delete offer" />
 						</a>
 					</td>
