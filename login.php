@@ -52,7 +52,7 @@ function content($connection) {
 		<br />
 		<p><b>Just for testing:</b><br />
 		Admin login data:<br />
-		Mail: admin@csusm.edu<br />
+		Mail: thorsten.kuehner@me.com<br />
 		Password: admin</p>
 		
 		<div class="submitbar">
