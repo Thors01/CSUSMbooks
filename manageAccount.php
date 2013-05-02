@@ -21,14 +21,6 @@ function content($connection) {
 	<br />
 	<br />
 	<p>Your existing book offers:</p>
-	<!-- Including jquery script -->
-	<script type="text/javascript" src="js/jquery.tablesorter.js"></script>
-	<script type="text/javascript" src="js/jquery.tablesorter.widgets.min.js"></script>
-	<script>
-		$(function(){
-			$("#offers").tablesorter();
-		});
-	</script>
 	<table id="offers" class="tablesorter">
 		<caption>Book offer</caption>
 		<thead>

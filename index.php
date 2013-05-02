@@ -18,8 +18,7 @@ function content($connection) {
 		<?php
 				if(isset($_POST['search_string'])) {
 					$search = $_POST['search_string'];
-					$sql_offer = "SELECT OfferId, o.Title, Author, Price, c.Title AS CTitle FROM OFFER o, CATEGORY c WHERE CURDATE() < ExpDate AND c.CategoryId = o.CategoryId
-					AND (o.title LIKE '%$search%' OR ISBN like '%$search%');";
+					$sql_offer = "SELECT OfferId, o.Title, Author, Price, c.Title AS CTitle FROM OFFER o, CATEGORY c WHERE CURDATE() < ExpDate AND c.CategoryId = o.CategoryId	AND (o.title LIKE '%$search%' OR ISBN like '%$search%');";
 					echo "<p>Here is the result for your search '$search':</p>";
 				} else {
 					$sql_offer = "SELECT OfferId, o.Title, Author, Price, c.Title AS CTitle FROM OFFER o, CATEGORY c WHERE CURDATE() < ExpDate AND c.CategoryId = o.CategoryId;";
