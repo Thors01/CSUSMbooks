@@ -16,6 +16,13 @@ function content($connection) {
 	?>
 	<a href="changeData.php" class="button">Change your data</a><br />
 	<a href="postOffer.php" class="button">Post new book offer</a>
+	<?php
+		if($isAdmin) {
+	?>
+		<br /><a href="manageUsers.php" class="button">manage user accounts</a>
+	<?php
+		}
+	?>
 	<br />
 	<br />
 	<br />
