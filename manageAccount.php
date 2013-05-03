@@ -25,13 +25,13 @@ function content($connection) {
 		<caption>Book offer</caption>
 		<thead>
 			<tr>
-				<th>Book title <img src="img/arrow_up.png" alt="sort desc" /><img src="img/arrow_down.png" alt="sort asc" /></th>
-				<th>Author <img src="img/arrow_up.png" alt="sort desc" /><img src="img/arrow_down.png" alt="sort asc" /></th>
-				<th>ISBN <img src="img/arrow_up.png" alt="sort desc" /><img src="img/arrow_down.png" alt="sort asc" /></th>
-				<th>Price (in $) <img src="img/arrow_up.png" alt="sort desc" /><img src="img/arrow_down.png" alt="sort asc" /></th>
-				<th>Posted on <img src="img/arrow_up.png" alt="sort desc" /><img src="img/arrow_down.png" alt="sort asc" /></th>
-				<th>Expires on <img src="img/arrow_up.png" alt="sort desc" /><img src="img/arrow_down.png" alt="sort asc" /></th>
-				<th>&nbsp;</th>
+				<th>Book title</th>
+				<th>Author</th>
+				<th>ISBN</th>
+				<th>Price (in $)</th>
+				<th>Posted on</th>
+				<th>Expires on</th>
+				<th class="no-sort">&nbsp;</th>
 			</tr>
 		</thead>
 		<tbody>

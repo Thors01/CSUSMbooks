@@ -353,12 +353,6 @@ table#offers thead th {
 	text-transform:uppercase;
 }
 
-table#offers thead th.tablesorter-header div {
-	font-size:1.2em;
-	font-weight:bold;
-	line-height:20px;
-}
-
 table#offers tbody td {
 	height:21px;
 	line-height:21px;
@@ -370,30 +364,32 @@ table#offers tbody td a.offer-icon {
 	float:left;
 }
 
-#offers th.header {
-	background-image: url(../img/arrow_unsorted.png);
+table#offers thead th.header {
+	font-size:1.2em;
+	font-weight:bold;
+	line-height:20px;
+	padding-bottom:8px;
+}
+
+table#offers th.no-sort {
+	background: none !important;
+}
+
+table#offers th.header {
+	background:url(../img/arrow_unsorted.png) 0 4px no-repeat;
 	cursor: pointer;
-	font-weight: bold;
-	background-repeat: no-repeat;
-	background-position: center left;
-	padding-left: 20px;
+	padding-left: 15px;
 	margin-left: -1px;
 }
 
-#offers th.headerSortDown {
+table#offers th.headerSortDown {
 	 background-image: url(../img/arrow_down.png);
-	 background-color: none;
-	 background-repeat: no-repeat;
-	 position: relative;
-	 right: 0;
+	 background-position-y: 5px;
 }
 
-#offers th.headerSortUp{
+table#offers th.headerSortUp{
 	 background-image: url(../img/arrow_up.png);
-	 background-color: none;
-	 background-repeat: no-repeat;
-	 position: relative;
-	 right: 0;
+	 background-position-y: 5px;
 }
 
 img#bookcover {
