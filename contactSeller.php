@@ -24,7 +24,7 @@ function content($connection) {
 		
 		// following code gets email from seller
 		$sql_recipient = "SELECT * FROM SELLER WHERE SellerId=$sellerid;";
-		$result_recipient = $connection->query($sql_recipient);// or die(mysqli_error($sql_recipient))
+		$result_recipient = $connection->query($sql_recipient); // or die(mysqli_error($sql_recipient))
 		$array_recipient = mysqli_fetch_array($result_recipient);
 		$recipient = $array_recipient[3];
 		
@@ -34,7 +34,7 @@ function content($connection) {
 		$mail_body = "You got a message regarding your book offer:\n" . "http://$host$uri/$extra?offerid=$offerid\n\n" . "Message: \n" . $_POST['message'] . "\n\nYou can also contact the user by phone: " . $_POST['phone'] . ".";
 		
 		$subject = $_POST['subject'];
-		$header = "From: ". $Name . " <" . $email . ">\r\n";
+		$header = "From: ". $Name . " <" . $email . ">\r\nCc:" . $email . "\r\n";
 
 		if (mail($recipient, $subject, $mail_body, $header)) {
 			echo "<p>You succesfully send an email. The seller is going to respond as soon as possible.</p>";
