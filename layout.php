@@ -7,6 +7,7 @@ include("config.php");
 	<head>
 		<meta charset="utf-8" />
 		<title>Get more for your old books! Test</title>
+		<link rel="icon" type="image/x-icon" href="img/favicon.ico" />
 		<link rel="stylesheet" media="screen" type="text/css" href="css/reset.css" />
 		<link rel="stylesheet" media="screen" type="text/css" href="css/styles.css" />
 		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
