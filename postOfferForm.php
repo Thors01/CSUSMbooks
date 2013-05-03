@@ -80,18 +80,11 @@
 				<td><label for="file">Picture:</label></td>
 				<td>
 					<?php
-						if ($imagePath != '') {
-					?>
-						<p class="tabletext">You've already uploaded this image: <a href="<?= $imagePath ?>"><?= $imagePath ?></a><br />
-						In order to change it, please select a new file:</p>
-					<?php
-						}
-						else {
-					?>
-							<p class="tabletext">Here you can upload an image for your offer:</p>
-					<?php
-						}
-					?>
+					echo $imagePath_msg;
+					if ($imagePath != '') {
+						echo "<p class='error'>Currently your offer has this image: <a href='".$imagePath."'>".$imagePath."</a></p>";	
+					}
+					?>					
 					<input type="file" name="file" id="file" /></td>
 			</tr>
 		</tbody>
@@ -101,11 +94,13 @@
 		if ($offerid != '') {
 	?>
 			<input type="hidden" name="offerid" value="<?= htmlspecialchars($offerid) ?>" />
+			<input type="hidden" name="imagePath" value="<?= htmlspecialchars($imagePath) ?>" />
 			<input type="submit" name="submit" id="submit" value="save changes" />
 	<?php
 		}
 		else {
 	?>	
+		<input type="hidden" name="imagePath" value="<?= htmlspecialchars($imagePath) ?>" />
 		<input type="submit" name="submit" id="submit" value="post new book offer" />
 	<?php
 		}

@@ -11,6 +11,8 @@ function content($connection) {
 	$notes = '';
 	$price = '';
 	$imagePath = '';
+	
+	$imagePath_msg = '';
 	if(isset($_SESSION['sellerid']) && isset($_SESSION['sellerfirstname'])) {
 		$sellerId = $_SESSION['sellerid'];
 		$sellerFirstname = $_SESSION['sellerfirstname'];
@@ -23,6 +25,8 @@ function content($connection) {
 		else {
 			$offerid = '';
 		}
+		
+		// getting the variables from the form if an error occured
 		$title = $_POST['title'];
 		$author = $_POST['author'];
 		$edition = $_POST['edition'];
@@ -32,17 +36,62 @@ function content($connection) {
 		$expDate = $_POST['expdate'];
 		$notes = $_POST['notes'];
 		$price = $_POST['price'];
+		$imagePath = $_POST['imagePath'];
 		
+		// converting the isbn in just digits
 		$isbn = str_replace("-", "", $isbn);
 		
+		// calculate expDate: today + 14 days if not set by seller
 		$postDate = date("Y-m-d");
 		if(empty($expDate)) {
 			$exp = mktime(0,0,0,date("m"),date("d")+14,date("Y"));
 			$expDate = date("Y-m-d", $exp);
 		}
 		
-		require_once("lib/upload_file.php");
+		// if a file is chosen, try to upload it and save it in $imagePath
+		if ($_FILES['file']['size'] != 0) {
+			$allowedExts = array("gif", "jpeg", "jpg", "png");
+			$extension = end(explode(".", $_FILES["file"]["name"]));
+			
+			if ((($_FILES["file"]["type"] == "image/gif")
+				|| ($_FILES["file"]["type"] == "image/jpeg")
+				|| ($_FILES["file"]["type"] == "image/jpg")
+				|| ($_FILES["file"]["type"] == "image/pjpeg")
+				|| ($_FILES["file"]["type"] == "image/x-png")
+				|| ($_FILES["file"]["type"] == "image/png"))
+				&& ($_FILES["file"]["size"] < 1048576)
+				&& in_array($extension, $allowedExts)) {
+				
+				if ($_FILES["file"]["error"] > 0) {
+					echo "<p class=\"error\">Error for file upload: " . $_FILES["file"]["error"] . "</p>";
+				}
+				else {
+					$file = $_FILES["file"]["name"];
+					$pos = strpos($file, ".");
+					$filename = substr($file, 0, $pos);
+					$i = 0;
+					$exists = false;
+					
+					while (!$exists) {
+						if(file_exists("upload/".$filename."_".$i.".".$extension)) {
+							$i++;
+						}
+						else {
+							move_uploaded_file($_FILES["file"]["tmp_name"], "upload/".$filename."_".$i.".".$extension);
+							$exists = true;
+						}
+					}
+					
+					$imagePath = "upload/".$filename."_".$i.".".$extension;	
+					$imagePath_msg = "<p class=\"error\">You successfully uploaded an image.</p>";
+				}
+			}
+			else {
+				$imagePath_msg = "<p class=\"error\">Invalid file! Your file should be gif, jpg or png and smaller than 1024kB.</p>";
+			}
+		}
 		
+		// validate the input fields
 		if(empty($title) || empty($author) || empty($isbn) || empty($price) 
 		|| !preg_match('/^.{2,}$/', $title) 
 		|| !preg_match('/^.{2,}$/', $author) 
@@ -52,7 +101,14 @@ function content($connection) {
 			echo "<p class=\"error\">Please check your input!</p>";
 			require_once("postOfferForm.php");
 		}
+		// if no validation error occurred store it to database
 		else {
+		
+			if ($imagePath == '') {
+				$imagePath = "img/example_cover.png";
+			}
+			
+			
 			if ($offerid != '') {
 				$sqlstring = "UPDATE OFFER SET `Title`='$title', `Author`='$author', `Edition`='$edition', `ISBN`='$isbn', `ConditionId`=$condition, `CategoryId`=$category, `Price`='$price', `SellerId`=$sellerId, `PostDate`='$postDate', `ExpDate`='$expDate', `ImagePath`='$imagePath', `Notes`='$notes' WHERE `OfferId` = $offerid";
 				$modify = true;
@@ -76,6 +132,7 @@ function content($connection) {
 					
 				}				
 			}
+			
 		}
 	}
 	

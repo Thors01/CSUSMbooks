@@ -29,16 +29,18 @@ function content($connection) {
 				<th>Author <img src="img/arrow_up.png" alt="sort desc" /><img src="img/arrow_down.png" alt="sort asc" /></th>
 				<th>ISBN <img src="img/arrow_up.png" alt="sort desc" /><img src="img/arrow_down.png" alt="sort asc" /></th>
 				<th>Price (in $) <img src="img/arrow_up.png" alt="sort desc" /><img src="img/arrow_down.png" alt="sort asc" /></th>
+				<th>Posted on <img src="img/arrow_up.png" alt="sort desc" /><img src="img/arrow_down.png" alt="sort asc" /></th>
+				<th>Expires on <img src="img/arrow_up.png" alt="sort desc" /><img src="img/arrow_down.png" alt="sort asc" /></th>
 				<th>&nbsp;</th>
 			</tr>
 		</thead>
 		<tbody>
 			<?php
 			if ($isAdmin) {
-				$sql_offer = "SELECT OfferId, Title, Author, Isbn, Price FROM OFFER";
+				$sql_offer = "SELECT OfferId, Title, Author, Isbn, Price, PostDate, ExpDate FROM OFFER";
 			}
 			else {
-				$sql_offer = "SELECT OfferId, Title, Author, Isbn, Price FROM OFFER WHERE SellerId = $sellerId";
+				$sql_offer = "SELECT OfferId, Title, Author, Isbn, Price, PostDate, ExpDate FROM OFFER WHERE SellerId = $sellerId";
 			}
 			$result_offer = $connection->query($sql_offer);
 			while ($row_offer = $result_offer->fetch_object()) {	
@@ -58,6 +60,8 @@ function content($connection) {
 					?>
 					</td>
 					<td><?=$row_offer->Price?></td>
+					<td><?=$row_offer->PostDate?></td>
+					<td><?=$row_offer->ExpDate?></td>
 					<td>
 						<a href="modifyOffer.php?offerid=<?=$row_offer->OfferId?>" class="offer-icon">
 							<img src="img/edit16.png" alt="edit offer" class="offer-icon" />
