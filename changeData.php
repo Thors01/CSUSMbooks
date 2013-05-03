@@ -26,15 +26,15 @@ function content($connection) {
 	
 		if(isset($_POST['submit'])) {
 			if (!$isAdmin || ($isAdmin && $sellerid==1)) {
-				if((empty($_POST['firstname']) || empty($_POST['lastname']) || !preg_match('/^[a-zA-Z]+$/', $_POST['firstname']) || !preg_match('/^[a-zA-Z]+$/', $_POST['lastname'])) || strlen($_POST['password']) < 6 || (empty($_POST['phone']) || !preg_match('/^[0-9 -.()]{6,}$/', $_POST['phone']))) {
+				if((empty($_POST['firstname']) || empty($_POST['lastname']) || !preg_match('/^[a-zA-Z]+$/', $_POST['firstname']) || !preg_match('/^[a-zA-Z]+$/', $_POST['lastname'])) || strlen(trim($_POST['password'], ' ')) < 6 || (empty($_POST['phone']) || !preg_match('/^[0-9 -.()]{6,}$/', $_POST['phone']))) {
 					$error = "<p class='error'>You did not fill in every field properly.</p>";
 				} 
 				else {
-					if(empty($_POST['password']) || empty($_POST['confirmpassword'])) {
+					if(empty(trim($_POST['password'], ' ')) || empty(trim($_POST['confirmpassword']), ' ')) {
 						$pw = false;
 					} 
 					else {
-						if($_POST['password'] == $_POST['confirmpassword']) {
+						if(trim($_POST['password'], ' ') == trim($_POST['confirmpassword'], ' ')) {
 							$pw = true;
 						} 
 						else {
@@ -59,7 +59,7 @@ function content($connection) {
 				$sql_data = "UPDATE SELLER SET `FirstName`='$firstname', `LastName`='$lastname', `Phone`='$phone' WHERE SellerId=$sellerid;";
 				$confirm = "<p>Your password is still the same.</p>";
 			} else {
-				$password = md5($_POST['password']);
+				$password = md5(trim($_POST['password'], ' '));
 				$sql_data = "UPDATE SELLER SET `FirstName`='$firstname', `LastName`='$lastname', `Phone`='$phone', `Password`='$password' WHERE SellerId=$sellerid;";					
 				$confirm = "<p>Don't forget: You changed your password, too.</p>";
 			}

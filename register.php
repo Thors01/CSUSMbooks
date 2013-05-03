@@ -4,8 +4,20 @@ function content($connection) {
 	<h1>Create a new account</h1>
 	<?php 
 		if(isset($_POST['submit'])) {
-			if((empty($_POST['firstname']) || empty($_POST['lastname']) || empty($_POST['mail']) || empty($_POST['confirmmail']) || empty($_POST['password']) || empty($_POST['confirmpassword'])
-			|| !preg_match('/^[a-zA-Z]+$/', $_POST['firstname']) || !preg_match('/^[a-zA-Z]+$/', $_POST['lastname']) || !preg_match('/^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,3})$/' ,$_POST['mail']) || $_POST['mail'] != $_POST['confirmmail'] || $_POST['password'] != $_POST['confirmpassword']) || strlen($_POST['password']) < 6 || (empty($_POST['phone']) || !preg_match('/^[0-9 -.()]{6,}$/', $_POST['phone']))) { // PW verschlüsselt darstellen und übertragen usw.
+			if(empty($_POST['firstname']) 
+			|| empty($_POST['lastname']) 
+			|| empty($_POST['mail']) 
+			|| empty($_POST['confirmmail']) 
+			|| empty($_POST['password']) 
+			|| empty($_POST['phone'])
+			|| empty($_POST['confirmpassword'])
+			|| !preg_match('/^[a-zA-Z]+$/', $_POST['firstname']) 
+			|| !preg_match('/^[a-zA-Z]+$/', $_POST['lastname']) 
+			|| !preg_match('/^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,3})$/' ,$_POST['mail']) 
+			|| ($_POST['mail'] != $_POST['confirmmail']) 
+			|| (trim($_POST['password'], ' ') != trim($_POST['confirmpassword'], ' ')) 
+			|| strlen(trim($_POST['password'], ' ')) < 6 
+			|| !preg_match('/^[0-9 -.()]{6,}$/', $_POST['phone'])) { // PW verschlüsselt darstellen und übertragen usw.
 				$error = "<p class=\"error\">Please check your input. You have to fill in all fields besides phone number.</p>";
 			} else {
 				$mail = $_POST['mail'];
@@ -26,7 +38,7 @@ function content($connection) {
 			$firstname = $_POST['firstname'];
 			$lastname = $_POST['lastname'];
 			$mail = $_POST['mail'];
-			$password = md5($_POST['password']);
+			$password = md5(trim($_POST['password'], ' '));
 			$phone = str_replace("-", "", $_POST['phone']);
 			$phone = str_replace(" ", "", $phone);
 			$phone = str_replace("(", "", $phone);

@@ -10,7 +10,7 @@ function content($connection) {
 				$error = "<p class='error'>Please check your input. You have to fill in all fields.</p>";
 			} else {
 				$mail = $_POST['mail'];
-				$password = md5($_POST['password']);
+				$password = md5(trim($_POST['password'],' '));
 				$sql_login = "SELECT * FROM SELLER WHERE Mail='$mail' AND Password = '$password';";
 				$result_login = $connection->query($sql_login);
 				$login = mysqli_fetch_array($result_login);
