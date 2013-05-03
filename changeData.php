@@ -25,18 +25,8 @@ function content($connection) {
 		}
 	
 		if(isset($_POST['submit'])) {
-			// validation of input fields if logged in as admin (no password change possible)
-			if ($isAdmin) {
-				if((empty($_POST['firstname']) || empty($_POST['lastname']) || !preg_match('/^[a-zA-Z]+$/', $_POST['firstname']) || !preg_match('/^[a-zA-Z]+$/', $_POST['lastname'])) || (empty($_POST['phone']) || !preg_match('/^[0-9 -.()]{6,}$/', $_POST['phone']))) {
-					$error = "<p class='error'>You did not fill in every field properly.</p>";
-				}
-				else {
-					$pw = false;
-				}
-			}
-			// validation of input fields if logged in as normal user (password must match if changed)
-			else {
-				if((empty($_POST['firstname']) || empty($_POST['lastname']) || !preg_match('/^[a-zA-Z]+$/', $_POST['firstname']) || !preg_match('/^[a-zA-Z]+$/', $_POST['lastname']))	|| strlen($_POST['password']) < 6 || (empty($_POST['phone']) || !preg_match('/^[0-9 -.()]{6,}$/', $_POST['phone']))) {
+			if (!$isAdmin || ($isAdmin && $sellerid==1)) {
+				if((empty($_POST['firstname']) || empty($_POST['lastname']) || !preg_match('/^[a-zA-Z]+$/', $_POST['firstname']) || !preg_match('/^[a-zA-Z]+$/', $_POST['lastname'])) || strlen($_POST['password']) < 6 || (empty($_POST['phone']) || !preg_match('/^[0-9 -.()]{6,}$/', $_POST['phone']))) {
 					$error = "<p class='error'>You did not fill in every field properly.</p>";
 				} 
 				else {
