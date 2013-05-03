@@ -27,7 +27,7 @@ function content($connection) {
 			if (mail($recipient, $subject, $mail_body, $header)) {
 				echo "<p>You succesfully sent an email. We will respond as soon as possible.</p>";
 			} else {
-				echo "An error occured. Please try again.";
+				echo "An error occurred. Please try again.";
 			}
 		}
 	 else {

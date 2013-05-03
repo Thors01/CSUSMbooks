@@ -37,10 +37,10 @@ function content($connection) {
 		$header = "From: ". $Name . " <" . $email . ">\r\nCc:" . $email . "\r\n";
 
 		if (mail($recipient, $subject, $mail_body, $header)) {
-			echo "<p>You succesfully send an email. The seller is going to respond as soon as possible.</p>";
+			echo "<p>You succesfully sent an email. The seller is going to respond as soon as possible.</p>";
 		} 
 		else {
-			echo "<p class=\"error\">An error occured. Please try again.</b></p>";
+			echo "<p class=\"error\">An error occurred. Please try again.</b></p>";
 		}
 	} 
 	
