@@ -349,8 +349,6 @@ table#offers {
 
 table#offers thead th {
 	height:20px;
-	margin:0 0 8px 0;
-	padding:0 0 8px 0;
 	color:#970000;
 	text-transform:uppercase;
 }
@@ -370,6 +368,32 @@ table#offers tbody td a.offer-icon {
 	margin-right:5px;
 	display:blocK;
 	float:left;
+}
+
+#offers th.header {
+	background-image: url(../img/arrow_unsorted.png);
+	cursor: pointer;
+	font-weight: bold;
+	background-repeat: no-repeat;
+	background-position: center left;
+	padding-left: 20px;
+	margin-left: -1px;
+}
+
+#offers th.headerSortDown {
+	 background-image: url(../img/arrow_down.png);
+	 background-color: none;
+	 background-repeat: no-repeat;
+	 position: relative;
+	 right: 0;
+}
+
+#offers th.headerSortUp{
+	 background-image: url(../img/arrow_up.png);
+	 background-color: none;
+	 background-repeat: no-repeat;
+	 position: relative;
+	 right: 0;
 }
 
 img#bookcover {

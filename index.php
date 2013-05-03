@@ -5,16 +5,16 @@ function content($connection) {
 		<caption>Book offer</caption>
 		<thead>
 			<tr>
-				<th>Book title <img src="img/arrow_up.png" alt="sort desc" /><img src="img/arrow_down.png" alt="sort asc" /></th>
-				<th>Author <img src="img/arrow_up.png" alt="sort desc" /><img src="img/arrow_down.png" alt="sort asc" /></th>
-				<th>Price (in $)<img src="img/arrow_up.png" alt="sort desc" /><img src="img/arrow_down.png" alt="sort asc" /></th>
+				<th>Book title</th>
+				<th>Author</th>
+				<th>Price (in $)</th>
 		<?php
 			if(isset($_GET["category"])) {
 				$categoryid = $_GET["category"];
 				$sql_offer = "SELECT OfferId, o.Title, Author, Price, c.Title AS CTitle FROM OFFER o, CATEGORY c WHERE CURDATE() < ExpDate AND o.CategoryId = '$categoryid' AND c.CategoryId = o.CategoryId;";
 			} else {
 		?>
-				<th>Category <img src="img/arrow_up.png" alt="sort desc" /><img src="img/arrow_down.png" alt="sort asc" /></th>
+				<th>Category</th>
 		<?php
 				if(isset($_POST['search_string'])) {
 					$search = $_POST['search_string'];

@@ -13,7 +13,7 @@ include("config.php");
 		<script type="text/javascript" src="js/jquery.tablesorter.js"></script>
 		<script type="text/javascript" src="js/jquery.tablesorter.min.js"></script>
 		<script>
-			$(function(){
+			$(document).ready(function(){
 				$("#offers").tablesorter();
 			});
 		</script>
