@@ -1,4 +1,4 @@
-<form action="postOffer.php" method="post" enctype="multipart/form-data">
+<form id="postOfferForm" action="postOffer.php" method="post" enctype="multipart/form-data">
 	<table id="inputfields">
 		<caption>post new book</caption>
 		<tbody>
@@ -66,7 +66,7 @@
 			</tr>
 			<tr>
 				<td><label for="expdate">Expiration Date:</label></td>
-				<td><input type="date" value="<?= htmlspecialchars($expDate) ?>" name="expdate" id="expdate" /></td>
+				<td><input type="text" name="expdate" value="<?= htmlspecialchars($expDate) ?>" id="datepicker" /><?= $expDate_msg_format ?></td>
 			</tr>
 			<tr>
 				<td><label for="notes">Notes:</label></td>
