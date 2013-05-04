@@ -20,6 +20,7 @@ function content($connection) {
 		if($isAdmin) {
 	?>
 		<br /><a href="manageUsers.php" class="button">manage user accounts</a>
+		<br /><a href="log/activity.txt" class="button">show activity log</a>
 	<?php
 		}
 	?>
