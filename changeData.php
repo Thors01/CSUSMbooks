@@ -8,6 +8,7 @@ function content($connection) {
 		echo "<p>Please login or register first.</p>";
 	} 
 	else {
+		// check if logged in user is admin
 		if ($_SESSION['sellerid'] == 1) {
 			$isAdmin = true;
 			if (isset($_GET['sellerid'])) {
@@ -25,8 +26,17 @@ function content($connection) {
 		}
 	
 		if(isset($_POST['submit'])) {
+			
 			if (!$isAdmin || ($isAdmin && $sellerid==1)) {
-				if((empty($_POST['firstname']) || empty($_POST['lastname']) || !preg_match('/^[a-zA-Z]+$/', $_POST['firstname']) || !preg_match('/^[a-zA-Z]+$/', $_POST['lastname'])) || strlen(trim($_POST['password'], ' ')) < 6 || (empty($_POST['phone']) || !preg_match('/^[0-9 -.()]{6,}$/', $_POST['phone']))) {
+				
+				// validate user input
+				if(empty($_POST['firstname']) 
+					|| empty($_POST['lastname']) 
+					|| !preg_match('/^[a-zA-Z]+$/', $_POST['firstname']) 
+					|| !preg_match('/^[a-zA-Z]+$/', $_POST['lastname']) 
+					|| strlen(trim($_POST['password'], ' ')) < 6 
+					|| empty($_POST['phone']) 
+					|| !preg_match('/^[0-9 -.()]{6,}$/', $_POST['phone'])) {
 					$error = "<p class='error'>You did not fill in every field properly.</p>";
 				} 
 				else {
@@ -42,6 +52,7 @@ function content($connection) {
 						}
 					}
 				}
+				
 			}
 		}
 		
@@ -55,14 +66,18 @@ function content($connection) {
 			$phone = str_replace(")", "", $phone);
 			$phone = str_replace(".", "", $phone);
 			
+			// save changes without different password
 			if(!$pw) {
 				$sql_data = "UPDATE SELLER SET `FirstName`='$firstname', `LastName`='$lastname', `Phone`='$phone' WHERE SellerId=$sellerid;";
 				$confirm = "<p>Your password is still the same.</p>";
-			} else {
+			} 
+			// save changes with new password
+			else {
 				$password = md5(trim($_POST['password'], ' '));
 				$sql_data = "UPDATE SELLER SET `FirstName`='$firstname', `LastName`='$lastname', `Phone`='$phone', `Password`='$password' WHERE SellerId=$sellerid;";					
 				$confirm = "<p>Don't forget: You changed your password, too.</p>";
 			}
+			// send sql statement to db
 			if(mysqli_query($connection, $sql_data)) {
 				echo "<p>You successfully changed your data. $confirm</p>";
 				createLog("$firstname (SellerId=$sellerid) changed his/her account data.");

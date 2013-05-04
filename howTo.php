@@ -3,10 +3,6 @@ function content($connection) {
 ?>
 	<h1>How To</h1>
 	<p>Here we answered frequently asked questions.	If you have further questions, please contact an admin by using the <a href="contactAdmin.php">contact form</a>.</p>
-<!-- Question #1 Do I need to create an account to search for a book and
-find a seller?
-Answer: No. You simply enter yor search term and results will be
-presented to you.-->
 	<h2>Generell questions</h2>
 	<ul>
 		<li>I do not attend CSUSM but I would like to list a book for sale. Can I use this site?

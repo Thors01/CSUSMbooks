@@ -1,4 +1,5 @@
 <?php
+// layout.php consists the template for the whole site structure. with the help of functions navigation and content will be generated depending on which page is called by the visitor.
 include("config.php");
 ?>
 

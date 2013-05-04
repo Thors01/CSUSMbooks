@@ -4,8 +4,15 @@ function content($connection) {
 	<h1>Contact</h1>
 	<?php 
 		if(isset($_POST['submit'])) {
-			if(empty($_POST["name"]) || empty($_POST["mail"]) || empty($_POST["subject"]) || empty($_POST["phone"]) || empty($_POST["message"])
-			|| !preg_match('/^[a-zA-Z]+$/', $_POST['name']) || !preg_match('/^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,3})$/' ,$_POST['mail']) || !preg_match('/^[0-9 -.()]{6,}$/', $_POST['phone'])) {
+			// validates user input
+			if(empty($_POST["name"]) 
+				|| empty($_POST["mail"]) 
+				|| empty($_POST["subject"]) 
+				|| empty($_POST["phone"]) 
+				|| empty($_POST["message"])
+				|| !preg_match('/^[a-zA-Z]+$/', $_POST['name']) 
+				|| !preg_match('/^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,3})$/' ,$_POST['mail']) 
+				|| !preg_match('/^[0-9 -.()]{6,}$/', $_POST['phone'])) {
 				$error = "<p class=\"error\">Please check your input. You have to fill in all fields.</p>";
 			}
 		}

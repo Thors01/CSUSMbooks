@@ -15,6 +15,7 @@ function content($connection) {
 	$expDate_msg_format = '';
 	$expDate_format_wrong = '';
 	
+	// gets session information
 	if(isset($_SESSION['sellerid']) && isset($_SESSION['sellerfirstname'])) {
 		$sellerId = $_SESSION['sellerid'];
 		$sellerFirstname = $_SESSION['sellerfirstname'];
@@ -119,7 +120,6 @@ function content($connection) {
 			if ($imagePath == '') {
 				$imagePath = "img/example_cover.png";
 			}
-			
 			
 			if ($offerid != '') {
 				$sqlstring = "UPDATE OFFER SET `Title`='$title', `Author`='$author', `Edition`='$edition', `ISBN`='$isbn', `ConditionId`=$condition, `CategoryId`=$category, `Price`='$price', `SellerId`=$sellerId, `PostDate`='$postDate', `ExpDate`='$expDate', `ImagePath`='$imagePath', `Notes`='$notes' WHERE `OfferId` = $offerid";

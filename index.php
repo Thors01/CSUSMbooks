@@ -9,6 +9,7 @@ function content($connection) {
 				<th>Author</th>
 				<th>Price (in $)</th>
 		<?php
+			// checks if just book offers of one particular category should be displayed
 			if(isset($_GET["category"])) {
 				$categoryid = $_GET["category"];
 				$sql_offer = "SELECT OfferId, o.Title, Author, Price, c.Title AS CTitle FROM OFFER o, CATEGORY c WHERE CURDATE() < ExpDate AND o.CategoryId = '$categoryid' AND c.CategoryId = o.CategoryId;";
@@ -16,11 +17,13 @@ function content($connection) {
 		?>
 				<th>Category</th>
 		<?php
+				// gets search string and shows just book offers with matching result
 				if(isset($_POST['search_string'])) {
 					$search = $_POST['search_string'];
 					$sql_offer = "SELECT OfferId, o.Title, Author, Price, c.Title AS CTitle FROM OFFER o, CATEGORY c WHERE CURDATE() < ExpDate AND c.CategoryId = o.CategoryId	AND (o.title LIKE '%$search%' OR ISBN like '%$search%');";
 					echo "<p>Here is the result for your search '$search':</p>";
-				} else {
+				} 
+				else {
 					$sql_offer = "SELECT OfferId, o.Title, Author, Price, c.Title AS CTitle FROM OFFER o, CATEGORY c WHERE CURDATE() < ExpDate AND c.CategoryId = o.CategoryId;";
 				}
 			}
@@ -29,6 +32,7 @@ function content($connection) {
 			</thead>
 		<tbody>
 		<?php
+			// display book offers as rows in a table depending on category or search string
 			$result_offer= $connection->query($sql_offer);
 			if(isset($_GET["category"])) {
 				$num_rows = mysqli_num_rows($result_offer);

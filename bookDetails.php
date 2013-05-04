@@ -15,7 +15,7 @@ function content($connection) {
 	}
 	else {
 		$offerid = $_GET["offerid"];
-	
+		// get book details from db
 		$sql_offer = "SELECT * FROM OFFER WHERE OfferId=$offerid";
 		$result_offer = $connection->query($sql_offer);
 		

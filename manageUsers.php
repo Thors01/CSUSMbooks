@@ -16,8 +16,8 @@ function content($connection) {
 		</thead>
 		<tbody>
 		<?php
+		// gets a list of all users 
 		$sql_users = "SELECT * FROM SELLER WHERE SellerId > 1";
-		
 		$result_users = $connection->query($sql_users);
 			while ($row_users = $result_users->fetch_object()) {	
 			?>
@@ -30,10 +30,6 @@ function content($connection) {
 					<td>
 						<a href="changeData.php?sellerid=<?=$row_users->SellerId?>" class="offer-icon">
 							<img src="img/edit16.png" alt="change data" class="offer-icon" />
-						</a>
-						
-						<a href="deleteAccount.php?sellerid=<?=$row_users->sellerId?>" class="offer-icon" onclick="return confirm('Do you really want to delete this user account? All related offers will be deleted as well.')">
-							<img src="img/delete16.png" alt="delete account" />
 						</a>
 					</td>
 				</tr>

@@ -3,20 +3,22 @@ function content($connection) {
 ?>	
 	<h1>manage account</h1>
 	<?php
+		// gets session information
 		if(isset($_SESSION['sellerid'])) {
 			$firstname = $_SESSION['sellerfirstname'];
 			$sellerId = $_SESSION['sellerid'];
 			if($_SESSION['sellerid'] == 1) {
 				$isAdmin = true;
-				echo "<b>Welcome back $firstname (Admin).</b><p>Here you can manage your account and existing offers.</p>";
+				echo "<p><b>Welcome back $firstname (Admin).</b>Here you can manage your account and existing offers.</p>";
 			} else {
 				$isAdmin = false;
-				echo "<b>Welcome back $firstname.</b><p>Here you can manage your account.</p>";
+				echo "<p><b>Welcome back $firstname.</b>Here you can manage your account.</p>";
 			}
 	?>
 	<a href="changeData.php" class="button">Change your data</a><br />
 	<a href="postOffer.php" class="button">Post new book offer</a>
 	<?php
+		// manage user accounts and activity log is just visible for admin
 		if($isAdmin) {
 	?>
 		<br /><a href="manageUsers.php" class="button">manage user accounts</a>
@@ -44,12 +46,14 @@ function content($connection) {
 		</thead>
 		<tbody>
 			<?php
+			// gets a list of all book offers (for normal seller just their own)
 			if ($isAdmin) {
 				$sql_offer = "SELECT OfferId, Title, Author, Isbn, Price, PostDate, ExpDate FROM OFFER";
 			}
 			else {
 				$sql_offer = "SELECT OfferId, Title, Author, Isbn, Price, PostDate, ExpDate FROM OFFER WHERE SellerId = $sellerId";
 			}
+			// display book offers in rows
 			$result_offer = $connection->query($sql_offer);
 			while ($row_offer = $result_offer->fetch_object()) {	
 			?>
@@ -74,9 +78,6 @@ function content($connection) {
 						<a href="modifyOffer.php?offerid=<?=$row_offer->OfferId?>" class="offer-icon">
 							<img src="img/edit16.png" alt="edit offer" class="offer-icon" />
 						</a>
-						
-						
-						
 						<a href="deleteOffer.php?offerid=<?=$row_offer->OfferId?>" class="offer-icon" onclick="return confirm('Do you really want to delete this offer?')">
 							<img src="img/delete16.png" alt="delete offer" />
 						</a>
@@ -90,7 +91,7 @@ function content($connection) {
 <?php
 	} 
 	else {
-		echo "Please login or register first.";
+		echo "<p>Please login or register first.</p>";
 	}
 }
 

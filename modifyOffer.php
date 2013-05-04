@@ -12,17 +12,20 @@ function content($connection) {
 	$imagePath = '';
 	$expDate_msg_format = '';
 	$imagePath_msg = '';
+	
+	// gets session information
 	if(isset($_SESSION['sellerid']) && isset($_SESSION['sellerfirstname'])) {
 		$sellerId = $_SESSION['sellerid'];
 		$sellerFirstname = $_SESSION['sellerfirstname'];
 	}
 	if (!isset($_GET["offerid"])) {
-		echo "Sorry, there is no offer.";
+		echo "<p>Sorry, there is no offer.</p>";
 	}
 	else {
 		$offerid = $_GET["offerid"];
 	}
 	
+	// gets book details for a particular book offer id
 	$sql_offer = "SELECT * FROM OFFER WHERE OfferId=$offerid";
 	$result_offer = $connection->query($sql_offer);
 	
@@ -39,8 +42,6 @@ function content($connection) {
 	$imagePath = $bookDetails[11];
 	
 	// convert isbn
-	// /^[0-9]([-| ]?[0-9]){9,12}$/
-	// substr(string,start,length)
 	if (strlen($bookDetails[4]) == 13) {
 		$isbn = substr($bookDetails[4], 0, 3)."-".substr($bookDetails[4], 3, 10);
 	}

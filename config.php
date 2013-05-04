@@ -1,10 +1,12 @@
 <?php
+// config.php consists of common functions which are used on all pages
+
+// establish db connection
 $dbhost = "localhost";
 $dbuser = "thors01";
 $dbpassword = "thors01";
 $dbname = "thors01";
 $connection = mysqli_connect($dbhost, $dbuser, $dbpassword, $dbname);
-// Check connection
 if (mysqli_connect_errno()) {
 	echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }
@@ -17,6 +19,7 @@ function createLog($activity) {
 	file_put_contents($logfile, $activity_log, FILE_APPEND | LOCK_EX);
 }
 
+// create left sidebar with category navigation
 function listCategory($connection) {
 	echo "<h1>Categories</h1><ul>";
 	$sql_category = "SELECT * FROM CATEGORY";
@@ -36,7 +39,7 @@ function listCategory($connection) {
 	echo "</ul>";
 }
 
-
+// create global navigation in header
 function globalNavigation($connection) {
 	session_start();
 	if(isset($_SESSION['sellerid'])) {

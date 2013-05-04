@@ -5,8 +5,15 @@ function content($connection) {
 	<h1>Contact Seller</h1>
 	<?php
 	if(isset($_POST['submit'])) {
-		if(empty($_POST["name"]) || empty($_POST["mail"]) || empty($_POST["subject"]) || empty($_POST["phone"]) || empty($_POST["message"])
-		|| !preg_match('/^[A-ZÄÖÜ][a-zäöüß]{2,}(|-[A-ZÄÖÜ][a-zäöüß]{2,})(|\s[A-ZÄÖÜ][a-zäöüß]{2,}(|-[A-ZÄÖÜ][a-zäöüß]{2,}))$/', $_POST['name']) || !preg_match('/^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,3})$/' ,$_POST['mail']) || !preg_match('/^[0-9 -.()]{6,}$/', $_POST['phone'])) {
+		// validates user input
+		if(empty($_POST["name"]) 
+			|| empty($_POST["mail"]) 
+			|| empty($_POST["subject"]) 
+			|| empty($_POST["phone"]) 
+			|| empty($_POST["message"])
+			|| !preg_match('/^[A-ZÄÖÜ][a-zäöüß]{2,}(|-[A-ZÄÖÜ][a-zäöüß]{2,})(|\s[A-ZÄÖÜ][a-zäöüß]{2,}(|-[A-ZÄÖÜ][a-zäöüß]{2,}))$/', $_POST['name']) 
+			|| !preg_match('/^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,3})$/' ,$_POST['mail']) 
+			|| !preg_match('/^[0-9 -.()]{6,}$/', $_POST['phone'])) {
 			$error = "<p class=\"error\">Please check your input. You have to fill in all fields.</p>";
 			$error_boolean = false;
 			echo $error;
@@ -16,6 +23,8 @@ function content($connection) {
 			$error_boolean = true;
 		}
 	}
+	
+	// if no errors occurred after submit is sent
 	if(isset($_POST['submit']) && $error_boolean) {
 		$Name = $_POST['name'];
 		$email = $_POST['mail'];
@@ -28,6 +37,7 @@ function content($connection) {
 		$array_recipient = mysqli_fetch_array($result_recipient);
 		$recipient = $array_recipient[3];
 		
+		// creates bodytext for mail with link to specific book offer
 		$host  = $_SERVER['HTTP_HOST'];
 		$uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
 		$extra = 'bookDetails.php';
@@ -44,6 +54,7 @@ function content($connection) {
 		}
 	} 
 	
+	// first page load when submit is NOT sent
 	if(!isset($_POST['submit'])) {
 		if (!isset($_GET["offerid"])) {
 			echo "<p>Sorry, there is no offer.</p>";
