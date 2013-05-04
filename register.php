@@ -17,11 +17,11 @@ function content($connection) {
 			|| ($_POST['mail'] != $_POST['confirmmail']) 
 			|| ($_POST['password'] != $_POST['confirmpassword']) 
 			|| strlen($_POST['password']) < 6 
-			|| !preg_match('/^[0-9 -.()]{6,}$/', $_POST['phone'])) { // PW verschlüsselt darstellen und übertragen usw.
+			|| !preg_match('/^[0-9 -.()]{6,}$/', $_POST['phone'])) {
 				$error = "<p class=\"error\">Please check your input. You have to fill in all fields besides phone number.</p>";
 			} else {
 				$mail = $_POST['mail'];
-				if(strpos($mail, "csusm.edu")) { // javascript for this part is different?!
+				if(strpos($mail, "csusm.edu")) {
 					$sql_mailcheck = "SELECT * FROM SELLER WHERE Mail='$mail';";
 					$result_mailcheck = $connection->query($sql_mailcheck);
 					$mail = mysqli_fetch_array($result_mailcheck);
@@ -44,14 +44,27 @@ function content($connection) {
 			$phone = str_replace("(", "", $phone);
 			$phone = str_replace(")", "", $phone);
 			$phone = str_replace(".", "", $phone);
-			$register = "INSERT INTO SELLER (`FirstName`, `LastName`, `Mail`, `Phone`, `Password`) VALUES ('$firstname', '$lastname', '$mail', '$phone', '$password')";
+			// Create a random string with length 10 for the account activation
+			$activate = "";
+			mt_srand((double)microtime() * 1000000);
+			$charset = "123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNPQRSTUVWXYZ";
+			$length  = strlen($charset)-1;
+			$code    = '';
+			for($i=0;$i<11;$i++) {
+				$activate .= $charset{mt_rand(0, $length)};
+			}
+			$register = "INSERT INTO SELLER (`FirstName`, `LastName`, `Mail`, `Phone`, `Password`, `Accountstatus`) VALUES ('$firstname', '$lastname', '$mail', '$phone', '$password', '$activate')";
 			
 			if (!mysqli_query($connection, $register)) {
 				die('Error: ' . mysqli_error($connection));
 			} else {
 				echo "<p>You succesfully created a new user account.</p>";
 				createLog("A new seller called $firstname just registered successfully.");
-				$mail_body = "Hi $firstname,\nyou succesfully created an user account at CSUSMBooks.";
+				$host  = $_SERVER['HTTP_HOST'];
+				$uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+				$extra = 'verify.php';
+
+				$mail_body = "Hi $firstname,\nyou succesfully created a new user account at CSUSMBooks.\nTo activate your account please go to the following link: http://$host$uri/$extra?code=$activate\n\n After you confirmed your mail address you can login.";
 				$subject = "New account at CSUSMBooks";
 				
 				// following code gets email from admin
@@ -62,7 +75,7 @@ function content($connection) {
 				$header = "From: CSUSM Books<$recipient[3]>\r\n";
 		
 				if (mail($mail, $subject, $mail_body, $header)) {
-					echo "<p>You got an email with the confirmation of creating a new user account.</p>";
+					echo "<p>You got an email to confirm your mail address.</p>";
 				} else {
 					echo "<p class=\"error\">An error occured. Unfortunately we could not send you a confirmation email.</p>";
 				}

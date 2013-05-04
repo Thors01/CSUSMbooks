@@ -11,12 +11,12 @@ function content($connection) {
 			} else {
 				$mail = $_POST['mail'];
 				$password = md5(trim($_POST['password'],' '));
-				$sql_login = "SELECT * FROM SELLER WHERE Mail='$mail' AND Password = '$password';";
+				$sql_login = "SELECT * FROM SELLER WHERE Mail='$mail' AND Password = '$password' AND Accountstatus='active';";
 				$result_login = $connection->query($sql_login);
 				$login = mysqli_fetch_array($result_login);
 
 				if($login == "") {				
-					$error = "<p class='error'>You did not enter the correct login data.</p>";
+					$error = "<p class='error'>You did not enter the correct login data. Did you already activate your account?</p>";
 				}
 			}
 		}
