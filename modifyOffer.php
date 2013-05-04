@@ -10,6 +10,8 @@ function content($connection) {
 	$notes = '';
 	$price = '';
 	$imagePath = '';
+	$expDate_msg_format = '';
+	$imagePath_msg = '';
 	if(isset($_SESSION['sellerid']) && isset($_SESSION['sellerfirstname'])) {
 		$sellerId = $_SESSION['sellerid'];
 		$sellerFirstname = $_SESSION['sellerfirstname'];
