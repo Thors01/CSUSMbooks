@@ -5,10 +5,10 @@ function content($connection) {
 	
 	<?php
 		if(isset($_POST['submit'])) {
-			if(!empty($_POST['mail']) && !empty($_POST['confirmmail'])) {				
-				if($_POST['mail'] == $_POST['confirmmail']) {
+			if(!empty($_POST['mail']) && !empty($_POST['confirmmail'])) { // If the user entered his mail address twice			
+				if($_POST['mail'] == $_POST['confirmmail']) { // and the entered mail address' are the same,
 					$mail = $_POST['mail'];
-					$sql_fpassword = "SELECT * FROM SELLER WHERE Mail='$mail';";
+					$sql_fpassword = "SELECT * FROM SELLER WHERE Mail='$mail';"; // we check if there is an user with this mail address.
 					$result_fpassword = $connection->query($sql_fpassword);
 					$fpassword = mysqli_fetch_array($result_fpassword);
 
@@ -22,9 +22,9 @@ function content($connection) {
 				$error = "<p class='error'>Please enter your email address twice.</p>";
 			}
 		} 
-		if(isset($_POST['submit']) && empty($error)) {
+		if(isset($_POST['submit']) && empty($error)) { // If there are no errors
 			$mail = $_POST['mail'];
-			// Create a random password with length 9
+			// a nw random password with length 9 will be created
 			$password = "";
 			mt_srand((double)microtime() * 1000000);
 			$charset = "123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNPQRSTUVWXYZ!?";
@@ -33,7 +33,7 @@ function content($connection) {
 			for($i=0;$i<10;$i++) {
 				$password .= $charset{mt_rand(0, $length)};
 			}
-			$passworde = md5($password);
+			$passworde = md5($password); // and stored encrypted in the database
 			$sql_data = "UPDATE SELLER SET `Password`='$passworde' WHERE `Mail`='$mail';";
 			if (!mysqli_query($connection, $sql_data)) {
 				die('Error: ' . mysqli_error($connection));

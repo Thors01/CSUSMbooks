@@ -6,11 +6,12 @@ function content($connection) {
 	Did you forget your password? If yes, <a href="forgotPassword.php">request a new password.</a></p>
 	<?php 
 		if(isset($_POST['submit'])) {
-			if(empty($_POST['mail']) || empty($_POST['password'])) {
+			if(empty($_POST['mail']) || empty($_POST['password'])) { // check if the user entered mail and password
 				$error = "<p class='error'>Please check your input. You have to fill in all fields.</p>";
 			} else {
+				// crosscheck the entered data with the database
+				$password = md5(trim($_POST['password'],' ')); // we encrypt the password to compare it to the database
 				$mail = $_POST['mail'];
-				$password = md5(trim($_POST['password'],' '));
 				$sql_login = "SELECT * FROM SELLER WHERE Mail='$mail' AND Password = '$password' AND Accountstatus='active';";
 				$result_login = $connection->query($sql_login);
 				$login = mysqli_fetch_array($result_login);
@@ -20,16 +21,16 @@ function content($connection) {
 				}
 			}
 		}
-		if(isset($_POST['submit']) && empty($error)) {
+		if(isset($_POST['submit']) && empty($error)) { // If the user pressed the submit button and there are no errors we start a new session --> The user is logged in.
 			$sellerid = "SELECT * FROM SELLER WHERE Mail='$mail';";
 			$result_sellerid = $connection->query($sellerid);
 			$getseller = mysqli_fetch_array($result_sellerid);
-			createLog("$mail logged in.");
+			createLog("$mail logged in."); // a log entry will be created
 			session_start();
 			setcookie("login", "true", time() + 86400);
 			$_SESSION['sellerid'] = $getseller[0];
 			$_SESSION['sellerfirstname'] = $getseller[1];
-			header("Location: manageAccount.php");
+			header("Location: manageAccount.php"); // The user will automatically be forwarded to manageAccount.php
 			exit();
 		} else {
 			if(!empty($error)) {

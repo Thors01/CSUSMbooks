@@ -3,7 +3,7 @@ function content($connection) {
 ?>	
 	<h1>Create a new account</h1>
 	<?php 
-		if(isset($_POST['submit'])) {
+		if(isset($_POST['submit'])) { // The user has to have insert his data in every field (besides phone) and the data has to fit to certain patterns.
 			if(empty($_POST['firstname']) 
 			|| empty($_POST['lastname']) 
 			|| empty($_POST['mail']) 
@@ -21,7 +21,7 @@ function content($connection) {
 				$error = "<p class=\"error\">Please check your input. You have to fill in all fields besides phone number.</p>";
 			} else {
 				$mail = $_POST['mail'];
-				if(strpos($mail, "csusm.edu")) {
+				if(strpos($mail, "csusm.edu")) { // The user has to register with a csusm.edu mail address. Then it will be checked if there is already an account with the entered mail address.
 					$sql_mailcheck = "SELECT * FROM SELLER WHERE Mail='$mail';";
 					$result_mailcheck = $connection->query($sql_mailcheck);
 					$mail = mysqli_fetch_array($result_mailcheck);
@@ -34,7 +34,7 @@ function content($connection) {
 				}
 			}
 		}
-		if(isset($_POST['submit']) && empty($error)) {
+		if(isset($_POST['submit']) && empty($error)) { // If there are no errors, a new account will be created.
 			$firstname = $_POST['firstname'];
 			$lastname = $_POST['lastname'];
 			$mail = $_POST['mail'];
@@ -44,7 +44,7 @@ function content($connection) {
 			$phone = str_replace("(", "", $phone);
 			$phone = str_replace(")", "", $phone);
 			$phone = str_replace(".", "", $phone);
-			// Create a random string with length 10 for the account activation
+			// Create a random string with length 10 for the account activation. The user gets an email to activate his account.
 			$activate = "";
 			mt_srand((double)microtime() * 1000000);
 			$charset = "123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNPQRSTUVWXYZ";
@@ -67,7 +67,7 @@ function content($connection) {
 				$mail_body = "Hi $firstname,\nyou succesfully created a new user account at CSUSMBooks.\nTo activate your account please go to the following link: http://$host$uri/$extra?code=$activate\n\n After you confirmed your mail address you can login.";
 				$subject = "New account at CSUSMBooks";
 				
-				// following code gets email from admin
+				// following code gets email from admin as sender
 				$sql_receipient = "SELECT * FROM SELLER WHERE SellerId=1";
 				$result_receipient = $connection->query($sql_receipient);
 				$recipient = mysqli_fetch_array($result_receipient);
