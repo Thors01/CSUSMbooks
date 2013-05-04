@@ -15,8 +15,8 @@ function content($connection) {
 			|| !preg_match('/^[a-zA-Z]+$/', $_POST['lastname']) 
 			|| !preg_match('/^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,3})$/' ,$_POST['mail']) 
 			|| ($_POST['mail'] != $_POST['confirmmail']) 
-			|| (trim($_POST['password'], ' ') != trim($_POST['confirmpassword'], ' ')) 
-			|| strlen(trim($_POST['password'], ' ')) < 6 
+			|| ($_POST['password'] != $_POST['confirmpassword']) 
+			|| strlen($_POST['password']) < 6 
 			|| !preg_match('/^[0-9 -.()]{6,}$/', $_POST['phone'])) { // PW verschlüsselt darstellen und übertragen usw.
 				$error = "<p class=\"error\">Please check your input. You have to fill in all fields besides phone number.</p>";
 			} else {

@@ -30,11 +30,11 @@ function content($connection) {
 					$error = "<p class='error'>You did not fill in every field properly.</p>";
 				} 
 				else {
-					if(empty(trim($_POST['password'], ' ')) || empty(trim($_POST['confirmpassword']), ' ')) {
+					if(empty($_POST['password']) || empty($_POST['confirmpassword'])) {
 						$pw = false;
 					} 
 					else {
-						if(trim($_POST['password'], ' ') == trim($_POST['confirmpassword'], ' ')) {
+						if($_POST['password'] == $_POST['confirmpassword']) {
 							$pw = true;
 						} 
 						else {
