@@ -9,6 +9,13 @@ if (mysqli_connect_errno()) {
 	echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }
 
+// create logfile
+function createLog($activity) {
+	$logfile = 'log/activity.txt';
+	$logtime = date('Y-m-d H:i:s');
+	$activity_log = $logtime . " -- " . $activity . "\n";
+	file_put_contents($logfile, $activity_log, FILE_APPEND | LOCK_EX);
+}
 
 function listCategory($connection) {
 	echo "<h1>Categories</h1><ul>";

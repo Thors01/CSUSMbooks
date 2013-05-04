@@ -65,6 +65,7 @@ function content($connection) {
 			}
 			if(mysqli_query($connection, $sql_data)) {
 				echo "<p>You successfully changed your data. $confirm</p>";
+				createLog("$firstname (SellerId=$sellerid) changed his/her account data.");
 			} else {
 				echo "<p class='error'>There was a connection error. Please try again.</p>";
 			}

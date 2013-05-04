@@ -27,7 +27,6 @@ include("config.php");
         <script type="text/javascript" src="js/validation.js"></script>
 	</head>
 	<body>
-
 	<div id="border">
 		<div id="header">
 			<div id="logo">

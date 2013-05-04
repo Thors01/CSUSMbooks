@@ -51,6 +51,7 @@ function content($connection) {
 		
 				if (mail($mail, $subject, $mail_body, $header)) {
 					echo "<p>You got an email with your new password.</p>";
+					createLog("The seller $mail requested a new password.");
 				} else {
 					echo "<p class='error'>An error occured. Unfortunately we could not send you an email with your new password.</p>";
 				}

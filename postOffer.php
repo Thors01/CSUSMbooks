@@ -137,11 +137,12 @@ function content($connection) {
 				if ($modify) {
 					echo "<h1>Modify existing book offer</h1>";
 					echo "<p>You succesfully modified an existing book offer.</p>";
+					createLog("$sellerFirstname (SellerId=$sellerId) modified the book offer $offerid.");
 				}
 				else {
 					echo "<h1>Post new book offer</h1>";
 					echo "<p>You succesfully posted a new book offer.</p>";
-					
+					createLog("$sellerFirstname (SellerId=$sellerId) posted a new book offer.");					
 				}				
 			}
 			

@@ -24,6 +24,7 @@ function content($connection) {
 		echo "We're sorry, an error occured.";
 	}
 	else {
+	createLog("$sellerFirstname (SellerId=$sellerId) deleted the book offer $offerid.");
 	?>
 		<h1>Deleting an existing book offer</h1>
 		<p>You successfully deleted an existing book offer.</p>	

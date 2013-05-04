@@ -50,6 +50,7 @@ function content($connection) {
 				die('Error: ' . mysqli_error($connection));
 			} else {
 				echo "<p>You succesfully created a new user account.</p>";
+				createLog("A new seller called $firstname just registered successfully.");
 				$mail_body = "Hi $firstname,\nyou succesfully created an user account at CSUSMBooks.";
 				$subject = "New account at CSUSMBooks";
 				

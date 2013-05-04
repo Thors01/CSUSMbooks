@@ -24,6 +24,7 @@ function content($connection) {
 			$sellerid = "SELECT * FROM SELLER WHERE Mail='$mail';";
 			$result_sellerid = $connection->query($sellerid);
 			$getseller = mysqli_fetch_array($result_sellerid);
+			createLog("$mail logged in.");
 			session_start();
 			setcookie("login", "true", time() + 86400);
 			$_SESSION['sellerid'] = $getseller[0];
