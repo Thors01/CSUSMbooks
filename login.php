@@ -53,8 +53,8 @@ function content($connection) {
 		<br />
 		<p><b>Just for testing:</b><br />
 		Admin login data:<br />
-		Mail: thorsten.kuehner@me.com<br />
-		Password: admin</p>
+		Mail: thors01@cougars.csusm.edu<br />
+		Password: adminacc</p>
 		
 		<div class="submitbar">
 		<input type="submit" name="submit" id="submit" value="login" />
