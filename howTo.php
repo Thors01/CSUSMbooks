@@ -36,8 +36,11 @@ presented to you.-->
 		<li>I forgot my password - what now?
 			<span>Go to the login page and click on forgot password. Enter your email address and then check your email.</span>
 		</li>
+		<li>How can I delete my account?
+			<span>Just contact the admin by mail and he will delete your account and the related offers for you.</span>
+		</li>
 		<li>I already sold my book - do I have to delete my offer?
-			<span>You can. Otherwise it will be deleted after the expiration date. If you want to delete it: Log into your account and press the delete-button of a listing.
+			<span>You can. Otherwise it will be deleted after the expiration date. If you want to delete it: Log into your account and press the delete-button of a listing.</span>
 		</li>
 		<li>How do I edit a listing to change the price or change any other data?
 			<span>Log into your account, chose a listings, click edit, make desired changes, then click save.</span>
@@ -49,7 +52,7 @@ presented to you.-->
 	<h2>Buyer</h2>
 	<ul>
 		<li>How can I search for a book?
-			<span>You do not need an account for it. You simply enter yor search term (ISBN or title) and results will be presented to you.</span>
+			<span>You do not need an account for it. You simply enter your search term (ISBN or title) and results will be presented to you.</span>
 		</li>
 		<li>How can I contact a seller?
 			<span>After you looked on book details you can contact the seller by clicking on "contact seller".</span>
