@@ -32,8 +32,8 @@ function content($connection) {
 				// validate user input
 				if(empty($_POST['firstname']) 
 					|| empty($_POST['lastname']) 
-					|| !preg_match('/^[a-zA-Z]+$/', $_POST['firstname']) 
-					|| !preg_match('/^[a-zA-Z]+$/', $_POST['lastname']) 
+					|| !preg_match('/^[^ 0-9]{1,}$/', $_POST['firstname']) 
+					|| !preg_match('/^[^ 0-9]{1,}$/', $_POST['lastname']) 
 					|| strlen(trim($_POST['password'], ' ')) < 6 
 					|| empty($_POST['phone']) 
 					|| !preg_match('/^[0-9 -.()]{6,}$/', $_POST['phone'])) {

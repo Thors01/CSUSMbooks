@@ -11,14 +11,14 @@ function content($connection) {
 			|| empty($_POST['password']) 
 			|| empty($_POST['phone'])
 			|| empty($_POST['confirmpassword'])
-			|| !preg_match('/^[a-zA-Z]+$/', $_POST['firstname']) 
-			|| !preg_match('/^[a-zA-Z]+$/', $_POST['lastname']) 
-			|| !preg_match('/^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,3})$/' ,$_POST['mail']) 
+			|| !preg_match('/^[^ 0-9]{1,}$/', $_POST['firstname']) 
+			|| !preg_match('/^[^ 0-9]{1,}$/', $_POST['lastname']) 
+			|| !preg_match('/^[_a-z0-9-]+(.[_a-z0-9-]+)*@(.[_a-z0-9-]*)*csusm.edu$/' ,$_POST['mail']) 
 			|| ($_POST['mail'] != $_POST['confirmmail']) 
 			|| ($_POST['password'] != $_POST['confirmpassword']) 
 			|| strlen($_POST['password']) < 6 
 			|| !preg_match('/^[0-9 -.()]{6,}$/', $_POST['phone'])) {
-				$error = "<p class=\"error\">Please check your input. You have to fill in all fields besides phone number.</p>";
+				$error = "<p class=\"error\">Please check your input. You have to fill in all fields.</p>";
 			} else {
 				$mail = $_POST['mail'];
 				if(strpos($mail, "csusm.edu")) { // The user has to register with a csusm.edu mail address. Then it will be checked if there is already an account with the entered mail address.
@@ -29,8 +29,6 @@ function content($connection) {
 					if($mail != "") {				
 						$error = "<p class=\"error\">There is already an user with your email address.<br /> If you forgot your password you can order a new one <a href='forgotPassword.php'>here</a>.</p>";
 					}
-				} else {
-					$error = "<p class=\"error\">Please enter a valid csusm.edu email address</p>";
 				}
 			}
 		}

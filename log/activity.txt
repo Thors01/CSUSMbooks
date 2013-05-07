@@ -1,5 +1,0 @@
-2013-05-04 01:06:50 -- thors01@csusm.edu logged in.
-2013-05-04 01:07:17 -- Thorsten (SellerId=5) changed his/her account data.
-2013-05-04 01:07:50 -- Thorsten (SellerId=5) modified the book offer 33.
-2013-05-04 01:08:29 -- Thorsten (SellerId=5) posted a new book offer.
-2013-05-04 01:09:12 -- Thorsten (SellerId=5) deleted the book offer 54.

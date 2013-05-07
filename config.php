@@ -3,9 +3,9 @@
 
 // establish db connection
 $dbhost = "localhost";
-$dbuser = "thors01";
-$dbpassword = "thors01";
-$dbname = "thors01";
+$dbuser = "group4";
+$dbpassword = "n4ecv3w8";
+$dbname = "group4";
 $connection = mysqli_connect($dbhost, $dbuser, $dbpassword, $dbname);
 if (mysqli_connect_errno()) {
 	echo "Failed to connect to MySQL: " . mysqli_connect_error();

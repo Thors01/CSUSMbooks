@@ -4,7 +4,7 @@
 		<tbody>
 			<tr>
 				<td><label for="name">Your name:</label></td>
-				<td><input type="text" name="name" id="name" value="<?php echo isset($_POST["name"])?$_POST["name"]:""; ?>" data-validation-pattern="^[A-ZÄÖÜ][a-zäöüß]{2,}(|-[A-ZÄÖÜ][a-zäöüß]{2,})(|\s[A-ZÄÖÜ][a-zäöüß]{2,}(|-[A-ZÄÖÜ][a-zäöüß]{2,}))$" data-validation-message="Please enter a valid name. Ex: John Smith" /></td>
+				<td><input type="text" name="name" id="name" value="<?php echo isset($_POST["name"])?$_POST["name"]:""; ?>" data-validation-pattern="^[^0-9]{1,}$" data-validation-message="Please enter a valid name. Ex: John Smith" /></td>
 			</tr>
 			<tr>
 				<td><label for="mail">Your mail:</label></td>
